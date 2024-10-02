@@ -5,6 +5,11 @@
 </head>
 <body>
     <h1>Students Database Management</h1>
+    {% if student_name %}
+        <h2>Hi {{ student_name }}!</h2>
+    {% else %}
+        <h2>Welcome, Guest!</h2>
+    {% endif %}
     <h2><button>Home</button></h2>
     <h2><button>About Us</button></h2>
     <h2><button>Academics</button></h2>
