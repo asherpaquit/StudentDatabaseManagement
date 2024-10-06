@@ -1,0 +1,42 @@
+.hello_student{
+    color: maroon;
+    width: 150px;
+    margin-bottom: 10%;
+    
+}
+
+body{
+    background-color: rgb(250, 233, 202);
+}
+
+.navbar{
+    font-family: 'Times New Roman', Times, serif;
+    width: 100%;
+    border: 2px;
+    background-color: maroon;
+    border-color: maroon;
+    color: white;
+}
+
+
+
+
+.logo{
+    margin-top: 100px;
+    width: 150px;
+    margin-left: 45%;
+}
+
+/* .banner-top{
+    width: 50%;
+} */
+
+.enroll_button{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: gold;
+    width: 100px;
+    height: 35px;
+    color: maroon;
+    border: 0px;
+    border-radius: 50px;
+}

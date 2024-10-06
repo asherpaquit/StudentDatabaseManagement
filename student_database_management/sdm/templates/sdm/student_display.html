@@ -2,17 +2,30 @@
 <html>
 <head>
     <title>SDM</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
 </head>
 <body>
-    <h1>Students Database Management</h1>
     {% if student_name %}
-        <h2>Hi {{ student_name }}!</h2>
-    {% else %}
-        <h2>Welcome, Guest!</h2>
-    {% endif %}
-    <h2><button>Home</button></h2>
-    <h2><button>About Us</button></h2>
-    <h2><button>Academics</button></h2>
-    <h2><button>Admission</button></h2>
+            <h2 class=>Hi {{ student_name }}!</h2>
+        {% else %}
+            <h2>Welcome, Guest!</h2>
+        {% endif %}
+
+    <table class="navbar">
+    <th><button  class="enroll_button">Enroll Now</button></th>
+    <th>Home</th>
+    <th>About Us</th>
+    <th>Academics</th>
+    <th>Admission</th>
+    <th>Student Services</th>
+
+    </table>
+    <div clas="logo-container">
+    <img src="{% static 'sdm/images/logo.png'%}" class="logo">
+    </div>
+    <h1 class="hello_student">Students Database Management</h1>
+        
+    
 </body>
 </html>
