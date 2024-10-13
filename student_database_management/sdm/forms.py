@@ -1,18 +1,12 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from .models import Student
 
-class StudentRegistrationForm(UserCreationForm):
-    student_name = forms.CharField(max_length=100, required=True, help_text='Required.')
+class StudentRegistrationForm(forms.ModelForm):
+    student_name = forms.CharField(max_length=100, required=True, help_text='Required.', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=True, help_text='Required.', widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     class Meta:
-        model = User
-        fields = ('username', 'password1', 'password2', 'student_name')
+        model = Student
+        fields = ('student_name', 'email')
 
-    def save(self, commit=True):
-        user = super().save(commit)
-        student = Student(user=user, student_name=self.cleaned_data['student_name'])
-        student.save()  # Save the student instance with the automatically generated student number
-        return user
 
