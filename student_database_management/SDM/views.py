@@ -5,26 +5,26 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Student
 
-# View to display all students
+
 def student_display(request):
-    students = Student.objects.all()  # Fetch all students from the database
+    students = Student.objects.all()  
     return render(request, 'sdm/student_display.html', {'students': students})  # Pass students to the template
 
-# View to register a new student
+
 def register_student(request):
     if request.method == "POST":
         student_name = request.POST['student_name']
         email = request.POST['email']
         password = request.POST['password']
 
-        # Hash the password before saving
+        
         hashed_password = make_password(password)
 
         try:
             student = Student(student_name=student_name, email=email, password=hashed_password)
             student.save()
             messages.success(request, "Student registered successfully!")
-            return redirect('login')  # Redirect to login page after successful registration
+            return redirect('login')  
         except Exception as e:
             messages.error(request, f"An error occurred: {e}")
 
@@ -40,8 +40,8 @@ def login_student(request):
             student = Student.objects.get(email=email)
             if check_password(password, student.password):
                 # Successful login
-                request.session['student_name'] = student.student_name  # Store name in session
-                return redirect('home')  # Redirect to home page
+                request.session['student_name'] = student.student_name  
+                return redirect('home')  
             else:
                 messages.error(request, "Invalid password.")
         except Student.DoesNotExist:
@@ -49,17 +49,20 @@ def login_student(request):
 
     return render(request, 'sdm/login.html')
 
+def aboutus(request):
+    return render(request, 'aboutus.html')
 
 
-# View to display the home page
 @login_required
 def home_view(request):
-    student_name = request.session.get('student_name')  # Get name from session
+    student_name = request.session.get('student_name') 
+    #Francis Nino Yap ----------#
     return render(request, 'sdm/home.html', {'student_name': student_name})
 
-# Add custom LoginView and LogoutView if needed (optional)
+
+# Terence John Duterte ------------ #
 class CustomLoginView(LoginView):
     template_name = 'sdm/login.html'
 
 class CustomLogoutView(LogoutView):
-    next_page = 'login'  # Redirect to the login page after logout
+    next_page = 'login'  

@@ -9,8 +9,7 @@ from django.utils import timezone
 class Student(models.Model):
     student_name = models.CharField(max_length=100)
     email = models.EmailField(primary_key=True)
-    password = models.CharField(max_length=128)  # Use a suitable max_length for hashed passwords
-    # You can also add other fields like created_at
+    password = models.CharField(max_length=128)  
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

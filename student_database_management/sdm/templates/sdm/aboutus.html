@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+</head>
+<body>
+    {% if student_name %}
+        <h2>Hi {{ student_name }}!</h2>  <!-- Changed from student_email to student_name -->
+    {% else %}
+        <h2>Welcome, Guest!</h2>
+    {% endif %}
+
+    <table class="navbar">
+        <tr>
+            <th><button class="enroll_button">Enroll Now</button></th>
+            <th><a href="{% url 'home' %}">Home</a></th>
+            <th>About Us</th>
+            <th>Academics</th>
+            <th>Admission</th>
+            <th>Student Services</th>
+        </tr>
+    </table>
+    <h2>
+        About Fucking US!
+    </h2>
+    {% comment %} <div class="logo-container">
+        <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+    </div>
+    <h1 class="hello_student">Students Database Management</h1>
+    <h2><a href="{% url 'logout' %}">Logout</a></h2> {% endcomment %}
+</body>
+</html>
