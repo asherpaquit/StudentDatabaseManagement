@@ -29,20 +29,29 @@
     <div class="logo-container">
         <img src="{% static 'sdm/images/logo.png' %}" class="logo">
     </div>
-    <h1 class="description addpad">Students Database Management</h1>
-    {% if student_name %}
-    <h1 class="description">Hi {{ student_name }}!</h1>  <!-- Changed from student_email to student_name -->
-    {% else %}
-    <h1 class="description">Welcome, Guest!</h1>
-    {% endif %}
+    <h1 class="description">Academics</h1>
 </section>
 <br>
 
 
     <section class="banner-section description2" id="banner2">
         <div class="banner">
-            <img src="{% static 'sdm/images/banner2.jpg' %}" alt="Banner 2">
-            <h1>Achieve Your Dreams with Us</h1>
+            <img src="{% static 'sdm/images/banner4.png' %}" alt="Banner 2">
+            <h1 class="headingb">Elementary</h1>
+        </div>
+    </section>
+
+    <section class="banner-section description2" id="banner2">
+        <div class="banner">
+            <img src="{% static 'sdm/images/banner5.jpg' %}" alt="Banner 2">
+            <h1 class="headingb">Senior and Junior High School</h1>
+        </div>
+    </section>
+
+    <section class="banner-section description2" id="banner2">
+        <div class="banner">
+            <img src="{% static 'sdm/images/banner3.png' %}" alt="Banner 2">
+            <h1 class="headingb">College</h1>
         </div>
     </section>
 

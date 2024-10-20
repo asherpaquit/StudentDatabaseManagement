@@ -55,6 +55,11 @@ def aboutus(request):
     student_name = request.session.get('student_name')
     return render(request, 'sdm/aboutus.html', {'student_name': student_name})
 
+@login_required
+def academics(request):
+    student_name = request.session.get('student_name')
+    return render(request, 'sdm/academics.html', {'student_name': student_name})
+
 
 @login_required
 def home_view(request):

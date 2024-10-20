@@ -4,6 +4,16 @@
     background-color: bisque;
 } */
 
+body.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: bisque; /* Or any background color you prefer */
+    font-family: Arial, sans-serif;
+}
+
 .navbar {
     font-family: 'Times New Roman', Times, serif;
     width: 100%;
@@ -101,6 +111,18 @@
     border-radius: 10px;
 }
 
+.banner .headingb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    color: gold;
+    background-color: maroon;
+    padding: 20px;
+    border-radius: 10px;
+}
+
 .section {
     width: 50%%;
     padding: 50px;
@@ -115,4 +137,54 @@
 .gold-bg {
     background-color: gold;
     color: maroon;
+}
+
+.login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.login-container h1 {
+    margin-bottom: 20px;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container label {
+    margin: 10px 0 5px;
+    align-self: flex-start;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    padding: 10px 20px;
+    background-color: maroon;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container p {
+    margin-top: 10px;
+}
+
+.login-container .logo {
+    margin-top: 20px;
+    width: 100px;
 }

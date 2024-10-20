@@ -4,20 +4,30 @@
     <title>Registration</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
-<form method="POST" action="{% url 'register' %}">
-    <h2 class="rFont">Registration</h2>
-
-    {% csrf_token %}
-    <label for="student_name">Student Name:</label>
-    <input type="text" id="student_name" name="student_name" required>
-    
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    
-    <button type="submit">Register</button>
-    <img src="{% static 'sdm/images/logo.png' %}" class="logo">
-</form>
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <h2 class="rFont">Registration</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <label for="student_name">Student Name:</label>
+            <input type="text" id="student_name" name="student_name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+    </div>
+</body>
 </html>
