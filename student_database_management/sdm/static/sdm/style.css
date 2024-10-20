@@ -1,19 +1,10 @@
-.hello_student{
-    color: maroon;
-    width: 150px;
-    margin-bottom: 10%;
-    
-}
+/* style.css */
 
-.rFont{
-    color: maroon;
-}
+/* body {
+    background-color: bisque;
+} */
 
-body{
-    background-color: rgb(250, 233, 202);
-}
-
-.navbar{
+.navbar {
     font-family: 'Times New Roman', Times, serif;
     width: 100%;
     border: 2px;
@@ -22,20 +13,63 @@ body{
     color: white;
 }
 
-
-
-
-.logo{
-    margin-top: 100px;
-    width: 150px;
-    margin-left: 45%;
+.logo-container {
+    text-align: center;
+    margin: 20px 0;
 }
 
-/* .banner-top{
-    width: 50%;
+.logo-background {
+    background-image: url("{% static 'sdm/images/banner1.png' %}"); /* Add the correct path to your background image */
+    background-size: cover; /* Ensure the image covers the entire div */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    padding: 50px; /* Add some padding if necessary */
+    text-align: center; /* Center the text */
+}
+
+/* .addpad{
+    margin-bottom: 10%;
 } */
 
-.enroll_button{
+.logo {
+    width: 150px;
+    margin: 0 auto;
+    animation: fadeIn 3s forwards;
+}
+
+.description {
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 10s forwards;
+}
+
+.description2 {
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 6s forwards;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.descbar{
+    background-color: maroon;
+    color: gold;
+    height: 250px;
+    font-weight: lighter;
+    /* padding-top: 50%; */
+    width: 100%;
+    font-style: italic;
+}
+
+.enroll_button {
     font-family: 'Times New Roman', Times, serif;
     background-color: gold;
     width: 100px;
@@ -43,4 +77,26 @@ body{
     color: maroon;
     border: 0px;
     border-radius: 50px;
+}
+
+.banner-section {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.banner-section img {
+    width: 100%;
+    height: 700px;
+}
+
+.banner h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
 }

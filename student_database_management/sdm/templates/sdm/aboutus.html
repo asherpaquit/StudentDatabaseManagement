@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>About Us</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
 </head>
 <body>
-    {% if student_name %}
-        <h2>Hi {{ student_name }}!</h2>  <!-- Changed from student_email to student_name -->
-    {% else %}
-        <h2>Welcome, Guest!</h2>
-    {% endif %}
-
     <table class="navbar">
         <tr>
             <th><button class="enroll_button">Enroll Now</button></th>
@@ -22,13 +16,47 @@
             <th>Student Services</th>
         </tr>
     </table>
-    <h2>
-        About Fucking US!
+    <h2 class="description">
+        Our Mission
     </h2>
-    {% comment %} <div class="logo-container">
+    <div class="description">
+        <p>
+            At CIT-U, our mission is to provide high-quality education that<br>
+            nurtures the intellectual, technical, and social skills of our<br>
+            students. We strive to create a learning environment that encourages<br>
+            critical thinking, creativity, and a commitment to lifelong learning.<br>
+            Through our comprehensive programs and dedicated faculty, we aim to prepare<br>
+            our students for the challenges and opportunities of the modern world<br>
+        </p>
+    </div>
+    <h2 class="description">
+        About CIT
+    </h2>
+    <div class="description">
+        <p>
+            Welcome to Cebu Institute of Technology - University (CIT-U), a premier educational<br>
+            institution dedicated to fostering academic excellence, innovation, and holistic development. <br>
+            Established in 1946, CIT-U has a rich history of producing globally competitive<br>
+            graduates who excel in various fields.
+        </p>
+    </div>
+    <h2 class="description">
+        About CIT
+    </h2>
+    <div class="description">
+        <p>
+            Welcome to Cebu Institute of Technology - University (CIT-U), a premier educational<br>
+            institution dedicated to fostering academic excellence, innovation, and holistic development. <br>
+            Established in 1946, CIT-U has a rich history of producing globally competitive<br>
+            graduates who excel in various fields.
+        </p>
+    </div>
+    {% comment %}
+    <div class="logo-container">
         <img src="{% static 'sdm/images/logo.png' %}" class="logo">
     </div>
     <h1 class="hello_student">Students Database Management</h1>
-    <h2><a href="{% url 'logout' %}">Logout</a></h2> {% endcomment %}
+    <h2><a href="{% url 'logout' %}">Logout</a></h2>
+    {% endcomment %}
 </body>
 </html>

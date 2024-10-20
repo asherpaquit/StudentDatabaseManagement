@@ -49,8 +49,10 @@ def login_student(request):
 
     return render(request, 'sdm/login.html')
 
+@login_required
 def aboutus(request):
-    return render(request, 'aboutus.html')
+    student_name = request.session.get('student_name')
+    return render(request, 'sdm/aboutus.html', {'student_name': student_name})
 
 
 @login_required
@@ -66,3 +68,7 @@ class CustomLoginView(LoginView):
 
 class CustomLogoutView(LogoutView):
     next_page = 'login'  
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
