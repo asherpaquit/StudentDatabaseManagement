@@ -49,7 +49,8 @@ def login_student(request):
 
     return render(request, 'sdm/login.html')
 
-
+def aboutus(request):
+    return render(request, 'aboutus.html')
 
 
 @login_required
