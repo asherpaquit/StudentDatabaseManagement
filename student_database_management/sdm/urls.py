@@ -12,13 +12,14 @@
 # ]
 
 from django.urls import path
-from .views import register_student, login_student, home_view, logout_view, aboutus
+from .views import register_student, login_student, home_view, aboutus, studentservice
 
 urlpatterns = [
     path('register/', register_student, name='register'),
     path('login/', login_student, name='login'),
     path('home/', home_view, name='home'),
-    path('logout/', logout_view, name='logout'),  # Use the custom logout view
+    path('logout/', login_student, name='logout'),  # Use the custom logout view
     path('aboutus/',aboutus, name='aboutus'),
+    path('studentservice/',studentservice, name='studentservice'),
 ]
 

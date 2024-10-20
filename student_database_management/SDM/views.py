@@ -41,6 +41,7 @@ def login_student(request):
             if check_password(password, student.password):
                 # Successful login
                 request.session['student_name'] = student.student_name  
+                request.session['email'] = student.email
                 return redirect('home')  
             else:
                 messages.error(request, "Invalid password.")
@@ -61,6 +62,12 @@ def home_view(request):
     #Francis Nino Yap ----------#
     return render(request, 'sdm/home.html', {'student_name': student_name})
 
+@login_required
+def studentservice(request):
+    student_name = request.session.get('student_name')
+    email = request.session.get('email')
+    return render(request, 'sdm/studentservice.html', {'student_name': student_name, 'student_email': email})
+
 
 # Terence John Duterte ------------ #
 class CustomLoginView(LoginView):
@@ -69,6 +76,3 @@ class CustomLoginView(LoginView):
 class CustomLogoutView(LogoutView):
     next_page = 'login'  
 
-def logout_view(request):
-    logout(request)
-    return redirect('login')
