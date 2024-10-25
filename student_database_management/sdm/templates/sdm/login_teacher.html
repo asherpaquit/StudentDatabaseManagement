@@ -2,8 +2,11 @@
 <html>
 <head>
     <title>Teacher Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
 </head>
-<body>
+<body class="login-page">
+    <div class="login-container">
     <h1>Login as Teacher</h1>
     <form method="POST">
         {% csrf_token %}
@@ -12,8 +15,10 @@
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br>
-
+        <p>Don't have an account? <a href="{% url 'register_teacher' %}">Register here</a></p>
+        <img src="{% static 'sdm/images/logo.png' %}" class="logo">
         <button type="submit">Login</button>
     </form>
+    </div>
 </body>
 </html>
