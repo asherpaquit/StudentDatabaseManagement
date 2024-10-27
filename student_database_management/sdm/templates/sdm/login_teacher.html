@@ -16,6 +16,7 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br>
         <p>Don't have an account? <a href="{% url 'register_teacher' %}">Register here</a></p>
+        <p>Are you a student?<a href="{% url 'login' %}">Click Here</a></p>
         <img src="{% static 'sdm/images/logo.png' %}" class="logo">
         <button type="submit">Login</button>
     </form>

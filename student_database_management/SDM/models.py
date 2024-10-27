@@ -1,15 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-class Student(models.Model):
-    student_name = models.CharField(max_length=100)
-    email = models.EmailField(primary_key=True)
-    password = models.CharField(max_length=128)
-    created_at = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return self.student_name
-
 class Teacher(models.Model):
     teacher_name = models.CharField(max_length=200)
     email = models.EmailField(primary_key=True)
@@ -18,6 +9,23 @@ class Teacher(models.Model):
 
     def __str__(self):
         return f"{self.teacher_name} ({self.subject})"
+    
+class Course(models.Model):
+    name = models.CharField(max_length=200)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='courses')
+
+    def __str__(self):
+        return self.name
+
+class Student(models.Model):
+    student_name = models.CharField(max_length=100)
+    email = models.EmailField(primary_key=True)
+    password = models.CharField(max_length=128)
+    created_at = models.DateTimeField(default=timezone.now)
+    enrolled_courses = models.ManyToManyField(Course, blank=True)  # Updated field for enrolled courses
+
+    def __str__(self):
+        return self.student_name
 
 class Grade(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -28,5 +36,4 @@ class Grade(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.subject}: {self.grade}"
-    
     

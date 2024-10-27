@@ -2,9 +2,94 @@
 <html>
 <head>
     <title>Teacher Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+    <style>
+        .tab {
+            display: none; /* Hide tabs by default */
+        }
+        .active {
+            display: block; /* Show active tab */
+        }
+    </style>
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            var tabs = document.getElementsByClassName('tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            // Show the selected tab
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
 </head>
 <body>
-    <h1>Welcome, {{ teacher_name }}</h1>
-    <p><a href="{% url 'add_grade' %}">Add Grade</a></p>
+    <table class="navbar">
+        <tr>
+            <nav>
+                <th><button onclick="showTab('dashboard')">Dashboard</button></th>
+                <th><button onclick="showTab('add-grade')">Add Grade</button></th>
+                <th><button onclick="showTab('enroll-student')">Enroll Student</button></th>
+                <th><a href="{% url 'login_teacher' %}">Logout</a></th>
+            </nav>
+        </tr>
+    </table>
+
+    <section class="logo-background">
+        <div class="logo-container">
+            <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+        </div>
+        <h1 class="description addpad">Teacher Dashboard</h1>
+        <h1 class="description">Welcome, {{ teacher_name }}</h1>
+    </section>
+    <br>
+
+    <!-- Teacher Dashboard Tab -->
+    <div id="dashboard" class="tab active">
+        <h2 class="description">Teacher Dashboard</h2>
+        <p class="description">View and manage your classes here.</p>
+    </div>
+
+    <!-- Add Grade Tab -->
+    <div id="add-grade" class="tab">
+        <h2 class="description">Add Grade for Student</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="student_email">Select Student:</label>
+            <select id="student_email" name="student_email" required>
+                {% for student in students %}
+                    <option value="{{ student.email }}">{{ student.student_name }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" required><br>
+
+            <button type="submit" name="add_grade">Submit Grade</button>
+        </form>
+    </div>
+
+    <!-- Enroll Student Tab -->
+<!-- Enroll Student Tab -->
+<div id="enroll-student" class="tab">
+    <h2 class="description">Enroll Student in Course</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="student_email">Select Student:</label>
+        <select id="student_email" name="student_email" required>
+            {% for student in students %}
+                <option value="{{ student.email }}">{{ student.student_name }}</option>
+            {% endfor %}
+        </select><br>
+        
+        <button type="submit" name="enroll_student">Enroll Student</button>
+    </form>
+</div>
+
+    <script>
+        // Show the dashboard tab on load
+        showTab('dashboard');
+    </script>
 </body>
 </html>

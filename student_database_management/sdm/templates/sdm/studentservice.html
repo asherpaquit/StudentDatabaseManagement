@@ -18,15 +18,13 @@
         </tr>
     </table>
     
-
-
     <section class="logo-background">
         <div class="logo-container">
             <img src="{% static 'sdm/images/logo.png' %}" class="logo">
         </div>
         <h1 class="description addpad">Student Services</h1>
         {% if student_name %}
-        <h1 class="description">Hi {{ student_name }}!</h1>  <!-- Changed from student_email to student_name -->
+        <h1 class="description">Hi {{ student_name }}!</h1>
         {% else %}
         <h1 class="description">Welcome, Guest!</h1>
         {% endif %}
@@ -42,14 +40,23 @@
         </div>
     </section>
 
-
     <section class="section gold-bg">
         <h2 class="description">Profile Details</h2>
         <div class="description">
             <p>
                 Name: {{ student_name }}<br>
                 Email: {{ student_email }}<br>
-                Course: {{ student_course }}<br>
+                Courses:
+                {% if student.enrolled_courses.all %}
+                    <ul>
+                        {% for course in student.enrolled_courses.all %}
+                            <li>{{ course.name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <span>No courses enrolled yet.</span>
+                {% endif %}
+                <br>
                 Year: {{ student_year }}
             </p>
         </div>
@@ -61,8 +68,5 @@
             <h1>Achieve Your Dreams with Us</h1>
         </div>
     </section>
-
-    
-    
 </body>
 </html>
