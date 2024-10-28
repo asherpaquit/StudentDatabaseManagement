@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
-    <script src="{% static "sdm/script/script.js" %}}"></script>
+    <script src="{% static 'sdm/script/script.js' %}"></script>
 </head>
 <body>
+    <!-- Navigation Bar -->
     <table class="navbar">
         <tr>
             <th><button class="enroll_button">Enroll Now</button></th>
@@ -19,58 +22,146 @@
         </tr>
     </table>
 
-    {% comment %} {% if student_name %}
-    <h2>Hi {{ student_name }}!</h2>  <!-- Changed from student_email to student_name -->
-{% else %}
-    <h2>Welcome, Guest!</h2>
-{% endif %} {% endcomment %}
+    <!-- Optional Welcome Message -->
+    {% comment %} 
+    {% if student_name %}
+        <h2>Hi {{ student_name }}!</h2>  
+    {% else %}
+        <h2>Welcome, Guest!</h2>
+    {% endif %} 
+    {% endcomment %}
 
-<section class="logo-background">
-    <div class="logo-container">
-        <img src="{% static 'sdm/images/logo.png' %}" class="logo">
-    </div>
-    <h1 class="description">Academics</h1>
-</section>
-<br>
+    <!-- Logo Section -->
+    <section class="logo-background">
+        <div class="logo-container">
+            <img src="{% static 'sdm/images/logo.png' %}" class="logo" alt="Logo">
+        </div>
+        <h1 class="description">Academics</h1>
+    </section>
+    <br>
 
+    <!-- Academic Level Navigation -->
+    <section class="academics-navigation">
+        <button onclick="showSection('elementary')">Elementary</button>
+        <button onclick="showSection('seniorHigh')">Senior & Junior High School</button>
+        <button onclick="showSection('college')">College</button>
+    </section>
 
-    <section class="banner-section description2" id="banner2">
+    <!-- Elementary Section -->
+    <section id="elementary" class="banner-section description2" style="display: block;">
         <div class="banner">
-            <img src="{% static 'sdm/images/banner4.png' %}" alt="Banner 2">
+            <img src="{% static 'sdm/images/banner4.png' %}" alt="Elementary Banner">
             <h1 class="headingb">Elementary</h1>
+            <p class="description">
+                Our elementary program provides young learners with a strong foundation in basic subjects,
+                encouraging curiosity, creativity, and a love for learning.
+            </p>
         </div>
     </section>
 
-    <section class="banner-section description2" id="banner2">
+    <!-- Senior High Section -->
+    <section id="seniorHigh" class="banner-section description2" style="display: none;">
         <div class="banner">
-            <img src="{% static 'sdm/images/banner5.jpg' %}" alt="Banner 2">
+            <img src="{% static 'sdm/images/banner5.jpg' %}" alt="Senior High Banner">
             <h1 class="headingb">Senior and Junior High School</h1>
+            <p class="description">
+                Our Senior and Junior High School programs offer an academic curriculum that prepares students 
+                for college and professional life.
+            </p>
         </div>
     </section>
 
-    <section class="banner-section description2" id="banner2">
+    <!-- College Section -->
+    <section id="college" class="banner-section description2" style="display: none;">
         <div class="banner">
-            <img src="{% static 'sdm/images/banner3.png' %}" alt="Banner 2">
+            <img src="{% static 'sdm/images/banner3.png' %}" alt="College Banner">
             <h1 class="headingb">College</h1>
+            <p class="description">
+                The college program offers a wide range of majors, helping students specialize in their chosen 
+                fields and preparing them for successful careers.
+            </p>
         </div>
     </section>
 
+    <!-- Description of the Institution -->
     <table class="descbar description">
         <tr>
             <th>
                 <p>
-                Welcome to Cebu Institute of Technology - University (CIT-U), a premier educational <br>
-                institution dedicated to fostering academic excellence, innovation, and holistic development. <br>
-                Established in 1946, CIT-U has a rich history of producing globally competitive graduates who<br>
-                excel in various fields.</p>
+                    Welcome to Cebu Institute of Technology - University (CIT-U), a premier educational 
+                    institution dedicated to fostering academic excellence, innovation, and holistic development.
+                    Established in 1946, CIT-U has a rich history of producing globally competitive graduates 
+                    who excel in various fields.
+                </p>
             </th>
             <th>
-                Life at CIT-U is vibrant and dynamic. Our campus is home to a diverse student body and offers <br>
-                a range of extracurricular activities, from student organizations and sports teams to cultural <br>
-                events and community service projects. These activities provide students with opportunities to <br>
-                develop leadership skills, build lasting friendships, and engage with the broader community.<br>
+                <p>
+                    Life at CIT-U is vibrant and dynamic. Our campus is home to a diverse student body and offers 
+                    a range of extracurricular activities, from student organizations and sports teams to cultural 
+                    events and community service projects. These activities provide students with opportunities 
+                    to develop leadership skills, build lasting friendships, and engage with the broader community.
+                </p>
             </th>
         </tr>
     </table>
+
+    <script>
+        // JavaScript function to show the selected section and hide others
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.banner-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Display the selected section
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
+
+    <style>
+        /* Styling for Navigation Buttons */
+        .academics-navigation {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .academics-navigation button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .academics-navigation button:hover {
+            background-color: #555;
+        }
+
+        .banner-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar li {
+                padding: 10px;
+            }
+
+            .academics-navigation button {
+                font-size: 14px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+        }
+    </style>
 </body>
 </html>

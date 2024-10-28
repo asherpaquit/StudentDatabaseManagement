@@ -181,6 +181,23 @@ def teacher_dashboard(request):
         'teacher': teacher,
     })
 
+
+    # Elementary Level View
+@login_required
+def elementary(request):
+    return render(request, 'sdm/elementary.html')
+
+# Senior High Level View
+@login_required
+def senior_high(request):
+    return render(request, 'sdm/senior_high.html')
+
+# College Level View
+@login_required
+def college(request):
+    return render(request, 'sdm/college.html')
+
+
 # @login_required
 # def add_grade(request):
 #     if request.method == "POST":
