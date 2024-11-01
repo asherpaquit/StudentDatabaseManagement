@@ -47,17 +47,24 @@
                 Name: {{ student_name }}<br>
                 Email: {{ student_email }}<br>
                 Courses:
-                {% if student.enrolled_courses.all %}
-                    <ul>
-                        {% for course in student.enrolled_courses.all %}
-                            <li>{{ course.name }}</li>
+                {% if courses_with_grades %}
+                    <table class="course-table">
+                        <tr>
+                            <th>Course</th>
+                            <th>Grade</th>
+                        </tr>
+                        {% for entry in courses_with_grades %}
+                            <tr>
+                                <td>{{ entry.course }}</td>
+                                <td>{{ entry.grade }}</td>
+                            </tr>
                         {% endfor %}
-                    </ul>
+                    </table>
                 {% else %}
                     <span>No courses enrolled yet.</span>
                 {% endif %}
                 <br>
-                Year: {{ student_year }}
+                Year: 
             </p>
         </div>
     </section>

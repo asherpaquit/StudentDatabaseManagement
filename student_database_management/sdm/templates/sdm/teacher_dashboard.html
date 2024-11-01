@@ -49,6 +49,20 @@
     <div id="dashboard" class="tab active">
         <h2 class="description">Teacher Dashboard</h2>
         <p class="description">View and manage your classes here.</p>
+        <table class="description">
+            <tr>
+                <th>Student Name</th>
+                <th>Student Email</th>
+                <th>Grade</th>
+            </tr>
+            {% for entry in students_with_grades %}
+                <tr>
+                    <td>{{ entry.student.student_name }}</td>
+                    <td>{{ entry.student.email }}</td>
+                    <td>{{ entry.grade }}</td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 
     <!-- Add Grade Tab -->
@@ -71,21 +85,20 @@
     </div>
 
     <!-- Enroll Student Tab -->
-<!-- Enroll Student Tab -->
-<div id="enroll-student" class="tab">
-    <h2 class="description">Enroll Student in Course</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="student_email">Select Student:</label>
-        <select id="student_email" name="student_email" required>
-            {% for student in students %}
-                <option value="{{ student.email }}">{{ student.student_name }}</option>
-            {% endfor %}
-        </select><br>
-        
-        <button type="submit" name="enroll_student">Enroll Student</button>
-    </form>
-</div>
+    <div id="enroll-student" class="tab">
+        <h2 class="description">Enroll Student in Course</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="student_email">Select Student:</label>
+            <select id="student_email" name="student_email" required>
+                {% for student in non_enrolled_students %}
+                    <option value="{{ student.email }}">{{ student.student_name }}</option>
+                {% endfor %}
+            </select><br>
+            
+            <button type="submit" name="enroll_student">Enroll Student</button>
+        </form>
+    </div>
 
     <script>
         // Show the dashboard tab on load

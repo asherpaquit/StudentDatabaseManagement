@@ -188,3 +188,24 @@ body.login-page {
     margin-top: 20px;
     width: 100px;
 }
+
+.course-table {
+    width: 100%; /* Adjust width as needed */
+    margin: 20px auto; /* Center the table horizontally */
+    border-collapse: collapse;
+    text-align: center; /* Center text within table cells */
+}
+.course-table th, .course-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.course-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+.course-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.course-table tr:hover {
+    background-color: #ddd;
+}

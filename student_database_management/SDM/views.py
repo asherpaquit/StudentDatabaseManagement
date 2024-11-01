@@ -75,14 +75,26 @@ def studentservice(request):
     try:
         # Fetch the student object
         student = Student.objects.get(email=email)
+        
+        # Prepare a list of courses with grades
+        courses_with_grades = []
+        for course in student.enrolled_courses.all():
+            grade = Grade.objects.filter(student=student, subject=course.name).first()
+            courses_with_grades.append({
+                'course': course.name,
+                'grade': grade.grade if grade else 'N/A'
+            })
+
         return render(request, 'sdm/studentservice.html', {
             'student_name': student_name,
             'student_email': email,
-            'student': student  # Pass the entire student object to the template
+            'courses_with_grades': courses_with_grades,  # Pass courses with grades
+              # Assuming 'year' is a field in Student model
         })
     except Student.DoesNotExist:
         messages.error(request, "Student not found.")
         return redirect('login')  # Redirect if the student is not found
+    
 
 # Terence John Duterte ------------ #
 class CustomLoginView(LoginView):
@@ -139,6 +151,21 @@ def teacher_dashboard(request):
         messages.error(request, "Teacher not found.")
         return redirect('login_teacher')
 
+    course = Course.objects.filter(teacher=teacher, name=teacher.subject).first()
+    students_with_grades = []
+    enrolled_students = []
+    non_enrolled_students = []
+
+    if course:
+        enrolled_students = Student.objects.filter(enrolled_courses=course)
+        for student in enrolled_students:
+            grade = Grade.objects.filter(student=student, subject=teacher.subject).first()
+            students_with_grades.append({
+                'student': student,
+                'grade': grade.grade if grade else 'N/A'
+            })
+        non_enrolled_students = Student.objects.exclude(enrolled_courses=course)
+
     if request.method == "POST":
         # Handling adding grades
         if 'add_grade' in request.POST:
@@ -146,10 +173,15 @@ def teacher_dashboard(request):
             grade_value = request.POST['grade']
             try:
                 student = Student.objects.get(email=student_email)
-                # Create and save the grade
-                grade = Grade(student=student, teacher=teacher, subject=teacher.subject, grade=grade_value)
-                grade.save()
-                messages.success(request, f"Grade {grade_value} added for {student.student_name}.")
+                if student in enrolled_students:
+                    # Create and save the grade
+                    grade, created = Grade.objects.update_or_create(
+                        student=student, teacher=teacher, subject=teacher.subject,
+                        defaults={'grade': grade_value}
+                    )
+                    messages.success(request, f"Grade {grade_value} added for {student.student_name}.")
+                else:
+                    messages.error(request, "Student not enrolled in your subject.")
                 return redirect('teacher_dashboard')  # Redirect to avoid resubmission
 
             except Student.DoesNotExist:
@@ -173,14 +205,14 @@ def teacher_dashboard(request):
             except Student.DoesNotExist:
                 messages.error(request, "Student not found.")
 
-    # Fetch all students for the dropdown
-    students = Student.objects.all()
-    return render(request, 'sdm/teacher_dashboard.html', {
+    context = {
         'teacher_name': teacher_name,
-        'students': students,
-        'teacher': teacher,
-    })
+        'students_with_grades': students_with_grades,
+        'students': enrolled_students,  # For displaying grades
+        'non_enrolled_students': non_enrolled_students,  # For enrollment form
+    }
 
+    return render(request, 'sdm/teacher_dashboard.html', context)
 
     # Elementary Level View
 @login_required
