@@ -12,7 +12,7 @@
 # ]
 
 from django.urls import path
-from .views import register_student, login_student, home_view, aboutus, studentservice, academics, register_teacher, login_teacher, teacher_dashboard
+from .views import register_student, login_student, home_view, aboutus, studentservice, academics, register_teacher, login_teacher, teacher_dashboard, college, senior_high, elementary
 
 urlpatterns = [
     path('register/', register_student, name='register'),
@@ -21,10 +21,14 @@ urlpatterns = [
     path('logout/', login_student, name='logout'),  # Use the custom logout view
     path('aboutus/',aboutus, name='aboutus'),
     path('studentservice/',studentservice, name='studentservice'),
-    path('academics/',academics, name='academics'),
+    # path('academics/',academics, name='academics'),
     path('register_teacher/', register_teacher, name='register_teacher'),
     path('login_teacher/', login_teacher, name='login_teacher'),
     path('teacher_dashboard/', teacher_dashboard, name='teacher_dashboard'),
+    path('academics/', academics, name='academics'),   #-- yap academics
+    path('academics/elementary/', elementary, name='elementary'),
+    path('academics/senior_high/', senior_high, name='senior_high'),
+    path('academics/college/', college, name='college'),
     # path('add_grade/', add_grade, name='add_grade'),
 ]
 
