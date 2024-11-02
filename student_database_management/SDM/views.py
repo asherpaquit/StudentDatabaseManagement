@@ -5,18 +5,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Student, Teacher, Grade, Course
 
+# Existing functions...
 
 def student_display(request):
     students = Student.objects.all()  
-    return render(request, 'sdm/student_display.html', {'students': students})  # Pass students to the template
-
+    return render(request, 'sdm/student_display.html', {'students': students})
 
 def register_student(request):
     if request.method == "POST":
         student_name = request.POST['student_name']
         email = request.POST['email']
         password = request.POST['password']
-
         
         hashed_password = make_password(password)
 
@@ -24,12 +23,11 @@ def register_student(request):
             student = Student(student_name=student_name, email=email, password=hashed_password)
             student.save()
             messages.success(request, "Student registered successfully!")
-            return redirect('login')  
+            return redirect('login')
         except Exception as e:
             messages.error(request, f"An error occurred: {e}")
 
     return render(request, 'sdm/register.html')
-
 
 def login_student(request):
     if request.method == "POST":
@@ -39,10 +37,9 @@ def login_student(request):
         try:
             student = Student.objects.get(email=email)
             if check_password(password, student.password):
-                # Successful login
                 request.session['student_name'] = student.student_name  
                 request.session['email'] = student.email
-                return redirect('home')  
+                return redirect('home')
             else:
                 messages.error(request, "Invalid password.")
         except Student.DoesNotExist:
@@ -60,11 +57,9 @@ def academics(request):
     student_name = request.session.get('student_name')
     return render(request, 'sdm/academics.html', {'student_name': student_name})
 
-
 @login_required
 def home_view(request):
-    student_name = request.session.get('student_name') 
-    #Francis Nino Yap ----------#
+    student_name = request.session.get('student_name')
     return render(request, 'sdm/home.html', {'student_name': student_name})
 
 @login_required
@@ -73,25 +68,39 @@ def studentservice(request):
     email = request.session.get('email')
 
     try:
-        # Fetch the student object
         student = Student.objects.get(email=email)
         return render(request, 'sdm/studentservice.html', {
             'student_name': student_name,
             'student_email': email,
-            'student': student  # Pass the entire student object to the template
+            'student': student
         })
     except Student.DoesNotExist:
         messages.error(request, "Student not found.")
-        return redirect('login')  # Redirect if the student is not found
+        return redirect('login')
 
-# Terence John Duterte ------------ #
+
+def admission(request):
+    if request.method == "POST":
+        student_name = request.POST.get('student_name')
+        email = request.POST.get('email')
+        course_interest = request.POST.get('course_interest')
+
+        if student_name and email and course_interest:
+            messages.success(request, "Admission application submitted successfully!")
+            return redirect('home')
+        else:
+            messages.error(request, "Please fill in all required fields.")
+
+    return render(request, 'sdm/admission.html')
+
+# Custom login and logout views for teachers and students
 class CustomLoginView(LoginView):
     template_name = 'sdm/login.html'
 
 class CustomLogoutView(LogoutView):
-    next_page = 'login'  
+    next_page = 'login'
 
-# Teacher Registration (optional)
+# Teacher registration and login
 def register_teacher(request):
     if request.method == "POST":
         teacher_name = request.POST['teacher_name']
@@ -109,7 +118,6 @@ def register_teacher(request):
 
     return render(request, 'sdm/register_teacher.html')
 
-# Teacher Login
 def login_teacher(request):
     if request.method == "POST":
         email = request.POST['email']
@@ -140,46 +148,38 @@ def teacher_dashboard(request):
         return redirect('login_teacher')
 
     if request.method == "POST":
-        # Handling adding grades
         if 'add_grade' in request.POST:
             student_email = request.POST['student_email']
             grade_value = request.POST['grade']
             try:
                 student = Student.objects.get(email=student_email)
-                # Create and save the grade
                 grade = Grade(student=student, teacher=teacher, subject=teacher.subject, grade=grade_value)
                 grade.save()
                 messages.success(request, f"Grade {grade_value} added for {student.student_name}.")
-                return redirect('teacher_dashboard')  # Redirect to avoid resubmission
-
+                return redirect('teacher_dashboard')
             except Student.DoesNotExist:
                 messages.error(request, "Student not found.")
-
-        # Handling enrolling students
         elif 'enroll_student' in request.POST:
             student_email = request.POST['student_email']
             try:
                 student = Student.objects.get(email=student_email)
-                # Get or create the course for the teacher's subject
                 course, created = Course.objects.get_or_create(name=teacher.subject, teacher=teacher)
-                # Enroll the student in the course if not already enrolled
                 if course not in student.enrolled_courses.all():
                     student.enrolled_courses.add(course)
                     messages.success(request, f"{student.student_name} has been enrolled in {teacher.subject}.")
                 else:
                     messages.info(request, f"{student.student_name} is already enrolled in {teacher.subject}.")
                 return redirect('teacher_dashboard')
-
             except Student.DoesNotExist:
                 messages.error(request, "Student not found.")
 
-    # Fetch all students for the dropdown
     students = Student.objects.all()
     return render(request, 'sdm/teacher_dashboard.html', {
         'teacher_name': teacher_name,
         'students': students,
         'teacher': teacher,
     })
+
 
 # @login_required
 # def add_grade(request):
