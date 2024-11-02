@@ -5,13 +5,13 @@ class Teacher(models.Model):
     teacher_name = models.CharField(max_length=200)
     email = models.EmailField(primary_key=True)
     password = models.CharField(max_length=128)
-    subject = models.CharField(max_length=200)
+    subject = models.CharField(max_length=200)  # This represents the course they teach
 
     def __str__(self):
         return f"{self.teacher_name} ({self.subject})"
     
 class Course(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='courses')
 
     def __str__(self):
@@ -22,7 +22,7 @@ class Student(models.Model):
     email = models.EmailField(primary_key=True)
     password = models.CharField(max_length=128)
     created_at = models.DateTimeField(default=timezone.now)
-    enrolled_courses = models.ManyToManyField(Course, blank=True)  # Updated field for enrolled courses
+    enrolled_courses = models.ManyToManyField(Course, blank=True)  # Stores courses the student is enrolled in
 
     def __str__(self):
         return self.student_name
@@ -36,4 +36,3 @@ class Grade(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.subject}: {self.grade}"
-    

@@ -51,6 +51,57 @@ def login_student(request):
     return render(request, 'sdm/login.html')
 
 @login_required
+def update_student_details(request):
+    if request.method == 'POST':
+        # Get the student using the email from the POST data or session
+        email = request.POST.get('email')  # Ensure your form sends the email
+        try:
+            student = Student.objects.get(email=email)  # Get student based on the email from the form
+        except Student.DoesNotExist:
+            messages.error(request, 'Student not found.')
+            return render(request, 'update_student.html', {'email': email})
+
+        student_name = request.POST.get('student_name')
+        old_password = request.POST.get('old_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        # Validate old password
+        if not check_password(old_password, student.password):
+            messages.error(request, 'Old password is incorrect.')
+            return render(request, 'update_student.html', {
+                'email': email,
+                'student_name': student.student_name,
+                'old_password': old_password,
+                'new_password': new_password,
+                'confirm_password': confirm_password,
+            })
+
+        # Validate new passwords
+        if new_password != confirm_password:
+            messages.error(request, 'New passwords do not match.')
+            return render(request, 'update_student.html', {
+                'email': email,
+                'student_name': student.student_name,
+                'old_password': old_password,
+                'new_password': new_password,
+                'confirm_password': confirm_password,
+            })
+
+        # Update student details
+        student.student_name = student_name
+        if new_password:
+            student.password = make_password(new_password)  # Hash the new password
+        student.save()
+
+        messages.success(request, 'Your details have been updated.')
+        return redirect('studentservice')  # Ensure you have a 'studentservice' URL
+
+    # If GET request, render the update form
+    return render(request, 'update_student.html')
+
+
+@login_required
 def aboutus(request):
     student_name = request.session.get('student_name')
     return render(request, 'sdm/aboutus.html', {'student_name': student_name})

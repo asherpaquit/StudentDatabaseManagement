@@ -12,7 +12,7 @@
 # ]
 
 from django.urls import path
-from .views import register_student, login_student, home_view, aboutus, studentservice, academics, register_teacher, login_teacher, teacher_dashboard, college, senior_high, elementary
+from .views import register_student, login_student, home_view, aboutus, studentservice, academics, register_teacher, login_teacher, teacher_dashboard, college, senior_high, elementary, update_student_details
 
 urlpatterns = [
     path('register/', register_student, name='register'),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('academics/elementary/', elementary, name='elementary'),
     path('academics/senior_high/', senior_high, name='senior_high'),
     path('academics/college/', college, name='college'),
+    path('update_student/', update_student_details, name='update_student'),
     # path('add_grade/', add_grade, name='add_grade'),
 ]
 
