@@ -78,7 +78,7 @@ def studentservice(request):
         messages.error(request, "Student not found.")
         return redirect('login')
 
-
+@login_required
 def admission(request):
     if request.method == "POST":
         student_name = request.POST.get('student_name')
