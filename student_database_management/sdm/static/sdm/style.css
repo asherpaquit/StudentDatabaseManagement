@@ -117,11 +117,14 @@ body.login-page {
 
 /* Section styles */
 .section {
-    width: 50%; /* Maintain original width */
+
+    width: 100%; /* Maintain original width */
     padding: 50px;
     text-align: center;
     margin: 20px auto; /* Center the section with margin */
     border-radius: 10px; /* Added rounded corners */
+
+
 }
 
 /* Background color styles */
@@ -196,4 +199,34 @@ body.login-page {
 .login-container .logo {
     margin-top: 20px;
     width: 100px;
+}
+
+.course-table {
+    width: 100%; /* Adjust width as needed */
+    margin: 20px auto; /* Center the table horizontally */
+    border-collapse: collapse;
+    text-align: center; /* Center text within table cells */
+}
+.course-table th, .course-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #f2f2f2;
+}
+/* .course-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+.course-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.course-table tr:hover {
+    background-color: #ddd;
+} */
+
+.section .description {
+    width: 100%;
+    text-align: center; /* Center text within the description div */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Student Details</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <h1>Update Student Details</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="{{ email }}" required>
+
+            <label for="student_name">Name:</label>
+            <input type="text" name="student_name" value="{{ student_name }}" required>
+
+            <label for="old_password">Old Password:</label>
+            <input type="password" name="old_password" value="{{ old_password }}">
+
+            <label for="new_password">New Password:</label>
+            <input type="password" name="new_password" value="{{ new_password }}">
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" name="confirm_password" value="{{ confirm_password }}">
+
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>

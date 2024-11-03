@@ -8,7 +8,11 @@
     <form method="POST">
         {% csrf_token %}
         <label for="student_email">Student Email:</label>
-        <input type="email" id="student_email" name="student_email" required><br>
+        <select id="student_email" name="student_email" required>
+            {% for student in students %}
+                <option value="{{ student.email }}">{{ student.student_name }} ({{ student.email }})</option>
+            {% endfor %}
+        </select><br>
 
         <label for="grade">Grade:</label>
         <input type="text" id="grade" name="grade" required><br>
