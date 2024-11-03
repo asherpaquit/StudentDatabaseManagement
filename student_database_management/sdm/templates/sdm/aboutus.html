@@ -1,68 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
 </head>
 <body>
-    <table class="navbar">
-        <tr>
-            <th><button class="enroll_button">Enroll Now</button></th>
-            <th><a href="{% url 'home' %}">Home</a></th>
-            <th>About Us</th>
-            <th><a href="{% url 'academics' %}">Academics</a></th>
-            <th>Admission</th>
-            <th><a href="{% url 'studentservice' %}">Student Services</a></th>
-        </tr>
-    </table>
+    <header>
+        <table class="navbar">
+            <tr>
+                <th><button class="enroll_button">Enroll Now</button></th>
+                <th><a href="{% url 'home' %}">Home</a></th>
+                <th>About Us</th>
+                <th><a href="{% url 'academics' %}">Academics</a></th>
+                <th>Admission</th>
+                <th><a href="{% url 'studentservice' %}">Student Services</a></th>
+            </tr>
+        </table>
+    </header>
 
-    <section class="section maroon-bg">
-        <h2 class="description">Our Mission</h2>
-        <div class="description">
-            <p>
-                At CIT-U, our mission is to provide high-quality education that<br>
-                nurtures the intellectual, technical, and social skills of our<br>
-                students. We strive to create a learning environment that encourages<br>
-                critical thinking, creativity, and a commitment to lifelong learning.<br>
-                Through our comprehensive programs and dedicated faculty, we aim to prepare<br>
-                our students for the challenges and opportunities of the modern world.<br>
+    <main>
+        <section class="section maroon-bg">
+            <h2 class="description">Our Mission</h2>
+            <p class="description">
+                At CIT-U, our mission is to provide high-quality education that nurtures the intellectual, technical, and social skills of our students. We strive to create a learning environment that encourages critical thinking, creativity, and a commitment to lifelong learning. Through our comprehensive programs and dedicated faculty, we aim to prepare our students for the challenges and opportunities of the modern world.
             </p>
-        </div>
-    </section>
+        </section>
 
-    <section class="section gold-bg">
-        <h2 class="description">Vision</h2>
-        <div class="description">
-            <p>
-                Our vision is to be a beacon of excellence in education,<br>
-                innovation, and societal development. We aspire to be<br>
-                recognized globally as a leading institution that not only<br>
-                imparts knowledge but also fosters a culture of critical<br>
-                thinking, creativity, and ethical leadership.<br>
+        <section class="section gold-bg">
+            <h2 class="description">Vision</h2>
+            <p class="description">
+                Our vision is to be a beacon of excellence in education, innovation, and societal development. We aspire to be recognized globally as a leading institution that not only imparts knowledge but also fosters a culture of critical thinking, creativity, and ethical leadership.
             </p>
-        </div>
-    </section>
+        </section>
 
-    <section class="section maroon-bg">
-        <h2 class="description">Core Values</h2>
-        <div class="description">
-            <p>
-                At Cebu Institute of Technology - University (CIT-U), our core values are the guiding principles that define our culture, shape our decisions, and inspire our community. These values are integral to our mission of providing an exceptional education and fostering a supportive and dynamic learning environment.
-
-                <br><br>Excellence
-
-                <br>We strive for the highest standards in all we do. Our commitment to excellence drives us to pursue academic rigor, innovative research, and continuous improvement. We encourage our students and faculty to reach their full potential and achieve outstanding results.
-
-                <br><br>Integrity
-
-                <br>We uphold the highest ethical standards in all our actions. Integrity is the foundation of our relationships and interactions. We promote honesty, transparency, and accountability within our community, ensuring that our actions are guided by fairness and respect.
-
-                <br><br>Innovation
-
-                <br>We foster a culture of creativity and forward-thinking. Innovation is at the heart of our approach to education and research. We encourage our students and faculty to challenge conventional thinking, explore new ideas, and develop solutions that address real-world problems.
-            </p>
-        </div>
-    </section>
+        <section class="section maroon-bg">
+            <h2 class="description">Core Values</h2>
+            <div class="description">
+                <p>
+                    At Cebu Institute of Technology - University (CIT-U), our core values are the guiding principles that define our culture, shape our decisions, and inspire our community. These values are integral to our mission of providing an exceptional education and fostering a supportive and dynamic learning environment.
+                </p>
+                <ul>
+                    <li><strong>Excellence:</strong> We strive for the highest standards in all we do. Our commitment to excellence drives us to pursue academic rigor, innovative research, and continuous improvement.</li>
+                    <li><strong>Integrity:</strong> We uphold the highest ethical standards in all our actions, promoting honesty, transparency, and accountability within our community.</li>
+                    <li><strong>Innovation:</strong> We foster a culture of creativity and forward-thinking, encouraging our students and faculty to challenge conventional thinking and explore new ideas.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

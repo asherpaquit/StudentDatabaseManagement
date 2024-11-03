@@ -1,65 +1,58 @@
 /* style.css */
 
-/* body {
-    background-color: bisque;
-} */
-
+/* General body styles */
 body.login-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: bisque; /* Or any background color you prefer */
+    background-color: bisque; /* Background color */
     font-family: Arial, sans-serif;
 }
 
+/* Navbar styles */
 .navbar {
     font-family: 'Times New Roman', Times, serif;
     width: 100%;
-    border: 2px;
     background-color: maroon;
-    border-color: maroon;
     color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Added subtle shadow */
 }
 
+/* Logo container styles */
 .logo-container {
     text-align: center;
     margin: 20px 0;
 }
 
+/* Logo background styles */
 .logo-background {
-    background-image: url("{% static 'sdm/images/banner1.png' %}"); /* Add the correct path to your background image */
-    background-size: cover; /* Ensure the image covers the entire div */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    padding: 50px; /* Add some padding if necessary */
-    text-align: center; /* Center the text */
+    background-image: url("{% static 'sdm/images/banner1.png' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px;
+    text-align: center;
+    border-radius: 15px; /* Added rounded corners for a softer look */
 }
 
-/* .addpad{
-    margin-bottom: 10%;
-} */
-
+/* Logo styles */
 .logo {
     width: 150px;
     margin: 0 auto;
     animation: fadeIn 3s forwards;
 }
 
-.description {
+/* Description styles */
+.description, .description2 {
     text-align: center;
     opacity: 0;
     animation: fadeIn 10s forwards;
+    padding: 15px; /* Added padding for improved spacing */
 }
 
-.description2 {
-    text-align: center;
-    opacity: 0;
-    animation: fadeIn 6s forwards;
-}
-
-
+/* Keyframes for fade-in effect */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -69,64 +62,72 @@ body.login-page {
     }
 }
 
-.descbar{
+/* Desc bar styles */
+.descbar {
     background-color: maroon;
     color: gold;
-    height: 250px;
+    height: auto; /* Changed to auto for better flexibility */
+    padding: 30px; /* Added padding for better text spacing */
     font-weight: lighter;
-    /* padding-top: 50%; */
-    width: 100%;
     font-style: italic;
+    text-align: center; /* Centered text */
 }
 
+/* Enroll button styles */
 .enroll_button {
     font-family: 'Times New Roman', Times, serif;
     background-color: gold;
     width: 100px;
     height: 35px;
     color: maroon;
-    border: 0px;
-    border-radius: 50px;
+    border: none; /* Removed border for a cleaner look */
+    border-radius: 20px; /* More rounded corners */
+    transition: background-color 0.3s; /* Added transition for hover effect */
 }
 
+.enroll_button:hover {
+    background-color: #e6be00; /* Slightly darker gold on hover */
+}
+
+/* Banner section styles */
 .banner-section {
     position: relative;
     text-align: center;
-    color: white;
+    margin-bottom: 20px; /* Added spacing below banner */
 }
 
 .banner-section img {
     width: 100%;
     height: 700px;
+    border-radius: 10px; /* Added rounded corners for softer edges */
 }
 
+/* Banner heading styles */
 .banner h1 {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 3em;
+    color: white;
     background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
 }
 
-.banner .headingb {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3em;
-    color: gold;
-    background-color: maroon;
-    padding: 20px;
-    border-radius: 10px;
-}
-
+/* Section styles */
 .section {
-    width: 100%;
+
+    width: 100%; /* Maintain original width */
+    padding: 50px;
+    text-align: center;
+    margin: 20px auto; /* Center the section with margin */
+    border-radius: 10px; /* Added rounded corners */
+
+
 }
 
+/* Background color styles */
 .maroon-bg {
     background-color: maroon;
     color: white;
@@ -137,19 +138,22 @@ body.login-page {
     color: maroon;
 }
 
+/* Login container styles */
 .login-container {
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Increased padding */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
     width: 300px;
     text-align: center;
+    margin: 20px auto; /* Centered login container */
 }
 
 .login-container h1 {
     margin-bottom: 20px;
 }
 
+/* Login form styles */
 .login-container form {
     display: flex;
     flex-direction: column;
@@ -167,6 +171,11 @@ body.login-page {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.3s; /* Added transition for focus effect */
+}
+
+.login-container input:focus {
+    border-color: maroon; /* Change border color on focus */
 }
 
 .login-container button {
@@ -176,6 +185,11 @@ body.login-page {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s; /* Added transition for hover effect */
+}
+
+.login-container button:hover {
+    background-color: #660000; /* Darker maroon on hover */
 }
 
 .login-container p {
