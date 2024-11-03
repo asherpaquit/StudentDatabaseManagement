@@ -1,67 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
-    <script src="{% static "sdm/script/script.js" %}}"></script>
+    <script src="{% static "sdm/script/script.js" %}"></script>
 </head>
 <body>
-    <table class="navbar">
-        <tr>
-            <th><button class="enroll_button">Enroll Now</button></th>
-            <th>Home</th>
-            <th><a href="{% url 'aboutus' %}">About Us</a></th>
-            <th><a href="{% url 'academics' %}">Academics</a></th>
-            <th>Admission</th>
-            <th><a href="{% url 'studentservice' %}">Student Services</a></th>
-            <th><a href="{% url 'logout' %}">Logout</a></th>
-        </tr>
-    </table>
+    <header>
+        <table class="navbar">
+            <tr>
+                <th><button class="enroll_button">Enroll Now</button></th>
+                <th>Home</th>
+                <th><a href="{% url 'aboutus' %}">About Us</a></th>
+                <th><a href="{% url 'academics' %}">Academics</a></th>
+                <th>Admission</th>
+                <th><a href="{% url 'studentservice' %}">Student Services</a></th>
+                <th><a href="{% url 'logout' %}">Logout</a></th>
+            </tr>
+        </table>
+    </header>
 
-    {% comment %} {% if student_name %}
-    <h2>Hi {{ student_name }}!</h2>  <!-- Changed from student_email to student_name -->
-{% else %}
-    <h2>Welcome, Guest!</h2>
-{% endif %} {% endcomment %}
+    <main>
+        <section class="logo-background">
+            <div class="logo-container">
+                <img src="{% static 'sdm/images/logo.png' %}" class="logo" alt="CIT-U Logo">
+            </div>
+            <h1 class="description addpad">Students Database Management</h1>
+            {% if student_name %}
+                <h2 class="description">Hi {{ student_name }}!</h2>
+            {% else %}
+                <h2 class="description">Welcome, Guest!</h2>
+            {% endif %}
+        </section>
+        
+        <section class="banner-section description2" id="banner2">
+            <div class="banner">
+                <img src="{% static 'sdm/images/banner2.jpg' %}" alt="Banner 2">
+                <h1>Achieve Your Dreams with Us</h1>
+            </div>
+        </section>
 
-<section class="logo-background">
-    <div class="logo-container">
-        <img src="{% static 'sdm/images/logo.png' %}" class="logo">
-    </div>
-    <h1 class="description addpad">Students Database Management</h1>
-    {% if student_name %}
-    <h1 class="description">Hi {{ student_name }}!</h1>  <!-- Changed from student_email to student_name -->
-    {% else %}
-    <h1 class="description">Welcome, Guest!</h1>
-    {% endif %}
-</section>
-<br>
-
-
-    <section class="banner-section description2" id="banner2">
-        <div class="banner">
-            <img src="{% static 'sdm/images/banner2.jpg' %}" alt="Banner 2">
-            <h1>Achieve Your Dreams with Us</h1>
-        </div>
-    </section>
-
-    <table class="descbar description">
-        <tr>
-            <th>
-                <p>
-                Welcome to Cebu Institute of Technology - University (CIT-U), a premier educational <br>
-                institution dedicated to fostering academic excellence, innovation, and holistic development. <br>
-                Established in 1946, CIT-U has a rich history of producing globally competitive graduates who<br>
-                excel in various fields.</p>
-            </th>
-            <th>
-                Life at CIT-U is vibrant and dynamic. Our campus is home to a diverse student body and offers <br>
-                a range of extracurricular activities, from student organizations and sports teams to cultural <br>
-                events and community service projects. These activities provide students with opportunities to <br>
-                develop leadership skills, build lasting friendships, and engage with the broader community.<br>
-            </th>
-        </tr>
-    </table>
+        <table class="descbar description">
+            <tr>
+                <th>
+                    <p>
+                        Welcome to Cebu Institute of Technology - University (CIT-U), a premier educational institution dedicated to fostering academic excellence, innovation, and holistic development. Established in 1946, CIT-U has a rich history of producing globally competitive graduates who excel in various fields.
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        Life at CIT-U is vibrant and dynamic. Our campus is home to a diverse student body and offers a range of extracurricular activities, from student organizations and sports teams to cultural events and community service projects. These activities provide students with opportunities to develop leadership skills, build lasting friendships, and engage with the broader community.
+                    </p>
+                </th>
+            </tr>
+        </table>
+    </main>
 </body>
 </html>
