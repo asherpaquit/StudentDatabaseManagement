@@ -54,39 +54,25 @@ def login_student(request):
 def update_student_details(request):
     if request.method == 'POST':
         # Get the student using the email from the POST data or session
-        email = request.POST.get('email')  # Ensure your form sends the email
+        email = request.POST.get('email')  # Make sure your form sends the email
         try:
             student = Student.objects.get(email=email)  # Get student based on the email from the form
         except Student.DoesNotExist:
             messages.error(request, 'Student not found.')
-            return render(request, 'update_student.html', {'email': email})
+            return redirect('update_student')
 
         student_name = request.POST.get('student_name')
         old_password = request.POST.get('old_password')
         new_password = request.POST.get('new_password')
         confirm_password = request.POST.get('confirm_password')
 
-        # Validate old password
         if not check_password(old_password, student.password):
             messages.error(request, 'Old password is incorrect.')
-            return render(request, 'update_student.html', {
-                'email': email,
-                'student_name': student.student_name,
-                'old_password': old_password,
-                'new_password': new_password,
-                'confirm_password': confirm_password,
-            })
+            return redirect('update_student')
 
-        # Validate new passwords
         if new_password != confirm_password:
             messages.error(request, 'New passwords do not match.')
-            return render(request, 'update_student.html', {
-                'email': email,
-                'student_name': student.student_name,
-                'old_password': old_password,
-                'new_password': new_password,
-                'confirm_password': confirm_password,
-            })
+            return redirect('update_student')
 
         # Update student details
         student.student_name = student_name
@@ -95,10 +81,11 @@ def update_student_details(request):
         student.save()
 
         messages.success(request, 'Your details have been updated.')
-        return redirect('studentservice')  # Ensure you have a 'studentservice' URL
+        return redirect('studentservice')  # Ensure you have a 'profile' URL
 
     # If GET request, render the update form
-    return render(request, 'update_student.html')
+    return render(request, 'sdm/update_student.html')
+
 
 
 @login_required
@@ -256,6 +243,21 @@ def teacher_dashboard(request):
             except Student.DoesNotExist:
                 messages.error(request, "Student not found.")
 
+        # Handling dropping students
+        elif 'drop_student' in request.POST:
+            student_email = request.POST['student_email']
+            try:
+                student = Student.objects.get(email=student_email)
+                if course in student.enrolled_courses.all():
+                    student.enrolled_courses.remove(course)
+                    messages.success(request, f"{student.student_name} has been dropped from {teacher.subject}.")
+                else:
+                    messages.info(request, f"{student.student_name} is not enrolled in {teacher.subject}.")
+                return redirect('teacher_dashboard')
+
+            except Student.DoesNotExist:
+                messages.error(request, "Student not found.")
+
     context = {
         'teacher_name': teacher_name,
         'students_with_grades': students_with_grades,
@@ -264,6 +266,7 @@ def teacher_dashboard(request):
     }
 
     return render(request, 'sdm/teacher_dashboard.html', context)
+
 
     # Elementary Level View
 @login_required

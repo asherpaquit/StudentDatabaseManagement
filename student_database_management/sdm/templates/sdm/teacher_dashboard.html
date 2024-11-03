@@ -54,12 +54,20 @@
                 <th>Student Name</th>
                 <th>Student Email</th>
                 <th>Grade</th>
+                <th>Action</th>
             </tr>
             {% for entry in students_with_grades %}
                 <tr>
                     <td>{{ entry.student.student_name }}</td>
                     <td>{{ entry.student.email }}</td>
                     <td>{{ entry.grade }}</td>
+                    <td>
+                        <form method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="student_email" value="{{ entry.student.email }}">
+                            <button type="submit" name="drop_student">Drop</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
