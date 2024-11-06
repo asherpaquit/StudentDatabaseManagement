@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <h2 class="rFont">Registration</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST" action="{% url 'registeradmin' %}">
+            {% csrf_token %}
+            <label for="admin_user">Admin Name:</label>
+            <input type="text" id="admin_user" name="admin_user" required>
+            
+            <label for="admin_email">Admin Email:</label>
+            <input type="email" id="admin_email" name="admin_email" required>
+            
+            <label for="admin_pass">Admin Password:</label>
+            <input type="password" id="admin_pass" name="admin_pass" required>
+            
+            <label for="confirm_admin_pass">Confirm Password:</label>
+            <input type="password" id="confirm_admin_pass" name="confirm_admin_pass" required>
+            
+            <button type="submit">Register</button>
+        </form>
+        {% comment %} <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p> {% endcomment %}
+        <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+    </div>
+</body>
+</html>

@@ -1,6 +1,15 @@
 from django.db import models
 from django.utils import timezone
 
+class Admin(models.Model):
+    admin_user = models.CharField(max_length=100)
+    admin_pass = models.CharField(max_length=100)
+    admin_email = models.CharField(max_length = 100, primary_key=True)
+    
+    def __str__(self):
+        return f"{self.admin_user}"
+
+
 class Teacher(models.Model):
     teacher_name = models.CharField(max_length=200)
     email = models.EmailField(primary_key=True)
@@ -36,3 +45,6 @@ class Grade(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.subject}: {self.grade}"
+
+    
+    

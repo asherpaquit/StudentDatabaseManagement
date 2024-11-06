@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
-from .models import Student, Teacher, Grade, Course
+from .models import Student, Teacher, Grade, Course, Admin
 
 # Existing functions...
 
@@ -28,6 +28,28 @@ def register_student(request):
             messages.error(request, f"An error occurred: {e}")
 
     return render(request, 'sdm/register.html')
+
+def register_admin(request):
+    if request.method == "POST":
+        admin_user = request.POST['admin_user']
+        admin_email = request.POST['admin_email']
+        admin_pass = request.POST['admin_pass']
+        confirm_admin_pass = request.POST['confirm_admin_pass']
+        
+        if admin_pass != confirm_admin_pass:
+            messages.error(request, "Passwords do not match.")
+            return redirect('registeradmin')
+
+        try:
+            admin = Admin(admin_user=admin_user, admin_email=admin_email, admin_pass=make_password(admin_pass))
+            admin.save()
+            messages.success(request, "Admin registered successfully")
+            return redirect('registeradmin')
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+        
+    return render(request, 'sdm/register_admin.html')
+
 
 def login_student(request):
     if request.method == "POST":
