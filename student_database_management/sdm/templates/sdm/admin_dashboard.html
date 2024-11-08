@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Teacher Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+    <style>
+        .tab {
+            display: none; /* Hide tabs by default */
+        }
+        .active {
+            display: block; /* Show active tab */
+        }
+    </style>
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            var tabs = document.getElementsByClassName('tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            // Show the selected tab
+            document.getElementById(tabName).classList.add('active');
+        }
+        // Show the active tab on load based on the URL parameter
+        window.onload = function() {
+            var activeTab = "{{ active_tab }}";
+            showTab(activeTab);
+        };
+    </script>
+</head>
+<body>
+    <table class="navbar">
+        <tr>
+            <nav>
+                <th><button onclick="showTab('select-teacher')">Select Teacher</button></th>
+                <th><button onclick="showTab('add-grade')">Add Grade</button></th>
+                <th><button onclick="showTab('enroll-student')">Enroll Student</button></th>
+                <th><button onclick="showTab('drop-student')">Drop Student</button></th>
+                <th><a href="{% url 'admin_dashboard' %}">Back to Admin Dashboard</a></th>
+                <th><a href="{% url 'login_admin' %}">Logout</a></th>
+            </nav>
+        </tr>
+    </table>
+
+    <section class="logo-background">
+        <div class="logo-container">
+            <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+        </div>
+        <h1 class="description addpad">Admin - Teacher Dashboard</h1>
+        <h1 class="description">Welcome, {{ admin_user }}</h1>
+    </section>
+    <br>
+
+    <!-- Select Teacher Tab -->
+    <div id="select-teacher" class="tab active">
+        <h2 class="description">Select a Teacher</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="teacher_email">Teacher:</label>
+            <select name="teacher_email" required>
+                <option value="" disabled selected>Select a teacher</option>
+                {% for teacher in teachers %}
+                    <option value="{{ teacher.email }}" {% if selected_teacher and teacher.email == selected_teacher.email %}selected{% endif %}>
+                        {{ teacher.teacher_name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">View Dashboard</button>
+        </form>
+
+        <h2 class="description">Add a Subject</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="tab" value="select-teacher">
+            <label for="subject_name">Subject Name:</label>
+            <input type="text" name="subject_name" required>
+            <button type="submit" name="add_subject">Add Subject</button>
+        </form>
+
+        <h2 class="description">Assign Subject to Teacher</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="tab" value="select-teacher">
+            <label for="teacher_email">Teacher:</label>
+            <select name="teacher_email" required>
+                <option value="" disabled selected>Select a teacher</option>
+                {% for teacher in teachers %}
+                    <option value="{{ teacher.email }}">{{ teacher.teacher_name }}</option>
+                {% endfor %}
+            </select>
+            <label for="subject">Subject:</label>
+            <select name="subject" required>
+                <option value="" disabled selected>Select a subject</option>
+                {% for subject in subjects %}
+                    <option value="{{ subject.name }}">{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="assign_subject">Assign Subject</button>
+        </form>
+    </div>
+
+    {% if selected_teacher %}
+    <div id="dashboard" class="tab">
+        <h2 class="description">Managing Teacher: {{ selected_teacher.teacher_name }}</h2>
+        
+        <h2 class="description">Enrolled Students</h2>
+        <table class="description">
+            <tr>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Grade</th>
+            </tr>
+            {% for entry in students_with_grades %}
+            <tr>
+                <td>{{ entry.student.student_name }}</td>
+                <td>{{ entry.student.email }}</td>
+                <td>{{ entry.grade }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- Add Grade Tab -->
+    <div id="add-grade" class="tab">
+        <h2 class="description">Add Grade for Student</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="teacher_email" value="{{ selected_teacher.email }}">
+            <label for="student_email">Student Email:</label>
+            <input type="email" name="student_email" required>
+            <label for="grade">Grade:</label>
+            <input type="text" name="grade" required>
+            <button type="submit" name="add_grade">Add Grade</button>
+        </form>
+    </div>
+
+    <!-- Enroll Student Tab -->
+    <div id="enroll-student" class="tab">
+        <h2 class="description">Enroll Student in Course</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="teacher_email" value="{{ selected_teacher.email }}">
+            <label for="student_email">Student Email:</label>
+            <input type="email" name="student_email" required>
+            <button type="submit" name="enroll_student">Enroll Student</button>
+        </form>
+    </div>
+
+    <!-- Drop Student Tab -->
+    <div id="drop-student" class="tab">
+        <h2 class="description">Drop Student from Course</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="teacher_email" value="{{ selected_teacher.email }}">
+            <label for="student_email">Student Email:</label>
+            <input type="email" name="student_email" required>
+            <button type="submit" name="drop_student">Drop Student</button>
+        </form>
+    </div>
+    {% endif %}
+</body>
+</html>

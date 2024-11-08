@@ -45,6 +45,21 @@
     </section>
     <br>
 
+    <!-- Subject Selection -->
+    <div>
+        <h2>Select Subject</h2>
+        <form method="GET" action="{% url 'teacher_dashboard' %}">
+            <select name="subject" onchange="this.form.submit()">
+                <option value="">Select a subject</option>
+                {% for subject in subjects %}
+                    <option value="{{ subject.name }}" {% if selected_subject == subject.name %}selected{% endif %}>
+                        {{ subject.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
     <!-- Teacher Dashboard Tab -->
     <div id="dashboard" class="tab active">
         <h2 class="description">Teacher Dashboard</h2>
@@ -65,6 +80,7 @@
                         <form method="POST" style="display:inline;">
                             {% csrf_token %}
                             <input type="hidden" name="student_email" value="{{ entry.student.email }}">
+                            <input type="hidden" name="selected_subject" value="{{ selected_subject }}">
                             <button type="submit" name="drop_student">Drop</button>
                         </form>
                     </td>
@@ -87,7 +103,8 @@
 
             <label for="grade">Grade:</label>
             <input type="text" id="grade" name="grade" required><br>
-
+            
+            <input type="hidden" name="selected_subject" value="{{ selected_subject }}">
             <button type="submit" name="add_grade">Submit Grade</button>
         </form>
     </div>
@@ -104,6 +121,7 @@
                 {% endfor %}
             </select><br>
             
+            <input type="hidden" name="selected_subject" value="{{ selected_subject }}">
             <button type="submit" name="enroll_student">Enroll Student</button>
         </form>
     </div>

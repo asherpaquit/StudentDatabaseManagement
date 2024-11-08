@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <h1>Admin Login</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'registeradmin' %}">Register here</a></p>
+        <p>Are you a teacher?<a href="{% url 'login_teacher' %}">Click Here</a></p>
+        <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+    </div>
+</body>
+</html>
