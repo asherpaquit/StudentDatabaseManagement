@@ -3,29 +3,27 @@
 <head>
     <title>Register Teacher</title>
     {% load static %}
-    <link rel = "stylesheet" href="{% static 'sdm/style.css' %}">
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
 </head>
 <body class="login-page">
     <div class="login-container">
-    <h1>Register as Teacher</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="teacher_name">Name:</label>
-        <input type="text" id="teacher_name" name="teacher_name" required><br>
+        <h1>Register as Teacher</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="teacher_name">Name:</label>
+            <input type="text" id="teacher_name" name="teacher_name" required><br>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
 
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required><br>
+            <button type="submit">Register</button>
+        </form>
 
-        <button type="submit">Register</button>
-    </form  >
-    <p>Already have an account? <a href="{% url 'login_teacher' %}">Login here</a></p>
-    <img src="{% static 'sdm/images/logo.png' %}" class="logo">
-</div>
+        <p>Already have an account? <a href="{% url 'login_teacher' %}">Login here</a></p>
+        <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+    </div>
 </body>
 </html>

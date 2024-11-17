@@ -46,8 +46,9 @@
             <p>
                 Name: {{ student_name }}<br>
                 Email: {{ student_email }}<br>
-                Courses:
+                Year: {{ student.year }}  <!-- Assuming 'year' is a field in Student model -->
             </p>
+            <p>Courses:</p>
             {% if courses_with_grades %}
                 <table class="course-table">
                     <tr>
@@ -64,9 +65,8 @@
             {% else %}
                 <span>No courses enrolled yet.</span>
             {% endif %}
-            <p>Year: </p>
         </div>
-        <p>want to update account <a href="{% url 'update_student' %}"> click here! </a>
+        <p>Want to update your account? <a href="{% url 'update_student' %}">Click here!</a></p>
     </section>
     
     <section class="banner-section description2" id="banner2">
