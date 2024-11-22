@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarships & Financial Aid - Cebu Institute of Technology</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #0044cc;
+            color: #fff;
+            padding: 1.5em 1em;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        section {
+            padding: 2em 1em;
+            margin: 1em auto;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #0044cc;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5em;
+        }
+
+        .scholarship-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+
+        .scholarship-table th,
+        .scholarship-table td {
+            border: 1px solid #ddd;
+            padding: 0.8em;
+            text-align: left;
+        }
+
+        .scholarship-table th {
+            background-color: #0044cc;
+            color: white;
+        }
+
+        .apply-now-button {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.8em 1.5em;
+            background-color: #0044cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .apply-now-button:hover {
+            background-color: #003399;
+        }
+
+        .financial-aid-icons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1em;
+        }
+
+        .financial-aid-icon {
+            font-size: 2rem;
+            color: #0044cc;
+        }
+
+        a {
+            color: #0044cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Scholarships & Financial Aid</h1>
+        <p>Explore opportunities to support your education at Cebu Institute of Technology.</p>
+    </header>
+
+    <section>
+        <h2>Scholarship Opportunities</h2>
+        <p>We provide a variety of scholarships to help you achieve your academic dreams:</p>
+        <ul>
+            <li>Academic Excellence Scholarship: 95% and above grades</li>
+            <li>Financial Aid: For families with an annual income below PHP 300,000</li>
+            <li>Sports Scholarship: For exceptional athletes</li>
+            <li>Special Grants: For talented artists and performers</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Scholarship and Financial Aid Programs</h2>
+        <p>Our institution is committed to making education accessible to everyone. Explore our scholarship opportunities and financial aid options tailored to your needs.</p>
+        <table class="scholarship-table">
+            <thead>
+                <tr>
+                    <th>Program</th>
+                    <th>Eligibility</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Merit-Based Scholarship</td>
+                    <td>Top 10% of students</td>
+                    <td>50% Tuition Waiver</td>
+                </tr>
+                <tr>
+                    <td>Need-Based Aid</td>
+                    <td>Family Income Below PHP 300,000</td>
+                    <td>Full Tuition Waiver</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/apply-now" class="apply-now-button">Apply Now</a>
+        <div class="financial-aid-icons">
+            <div class="financial-aid-icon">💰</div>
+            <div class="financial-aid-icon">📜</div>
+            <div class="financial-aid-icon">🎓</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Eligibility Requirements</h2>
+        <p>To apply for scholarships, you must:</p>
+        <ul>
+            <li>Maintain a minimum GPA of 90%.</li>
+            <li>Submit the following documents:
+                <ul>
+                    <li>Transcript of Records</li>
+                    <li>Certificate of Good Moral Character</li>
+                    <li>Proof of Annual Income (for financial aid)</li>
+                </ul>
+            </li>
+            <li>Pass the scholarship application interview.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Connect with Us</h2>
+        <p>Sign up using the links below:</p>
+        <ul>
+            <li><a href="https://twitter.com/signup" target="_blank">Sign up with Twitter</a></li>
+            <li><a href="https://facebook.com/signup" target="_blank">Sign up with Facebook</a></li>
+            <li>Call or SMS us: <a href="tel:+639123456789">+63 912 345 6789</a></li>
+        </ul>
+    </section>
+</body>
+</html>
