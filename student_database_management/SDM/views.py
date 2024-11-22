@@ -50,6 +50,9 @@ def login_admin(request):
 
     return render(request, 'sdm/login_admin.html')
 
+def contact_forum(request):
+    return render(request, 'sdm/contact-forum.html')
+
 def scholarship(request):
     return render(request, 'sdm/scholarship.html')
 
