@@ -51,7 +51,7 @@ def login_admin(request):
     return render(request, 'sdm/login_admin.html')
 
 def scholarship(request):
-    return render(request, 'sdm/student_display.html')
+    return render(request, 'sdm/scholarship.html')
 
 def register_admin(request):
     if request.method == "POST":
