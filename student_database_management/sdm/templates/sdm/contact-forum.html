@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+</head>
+<body>
+    <table class="navbar">
+        <tr>
+            <th><button class="enroll_button">Enroll Now</button></th>
+            <th><a href="{% url 'home' %}">Home</a></th>
+            <th><a href="{% url 'academics' %}">Academics</a></th>
+            <th><a href="{% url 'admission' %}">Admission</a></th>
+            <th><a href="{% url 'studentservice' %}">Student Services</a></th>
+        </tr>
+    </table>
+
+    <main>
+        <section class="section maroon-bg">
+            <h2 class="description">Contact Us</h2>
+            <p class="description">
+                We value your feedback and inquiries. Please fill out the form below to get in touch with us, and we'll get back to you as soon as possible.
+            </p>
+        </section>
+
+        <section class="section gold-bg">
+            <h2 class="description">Get in Touch</h2>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="description form-group">
+                    <label for="name"><strong>Your Name:</strong></label><br>
+                    <input type="text" id="name" name="name" required class="form-control">
+                </div>
+                <div class="description form-group">
+                    <label for="email"><strong>Your Email:</strong></label><br>
+                    <input type="email" id="email" name="email" required class="form-control">
+                </div>
+                <div class="description form-group">
+                    <label for="message"><strong>Your Message:</strong></label><br>
+                    <textarea id="message" name="message" rows="6" required class="form-control"></textarea>
+                </div>
+                <div class="description">
+                    <button type="submit" class="enroll_button">Send Message</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
