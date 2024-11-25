@@ -7,6 +7,10 @@ from .models import Student, Teacher, Grade, Course, Admin,CourseTeacher, Course
 
 # Existing functions...
 
+def announcement_display(request):
+    return(request, 'sdm/announcement.html')
+
+
 def student_display(request):
     students = Student.objects.all()  
     return render(request, 'sdm/student_display.html', {'students': students})
