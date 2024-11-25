@@ -1,1 +1,60 @@
-<h1> Announcement for Terence </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+</head>
+<body>
+    <table class="navbar">
+        <tr>
+            <th><button class="enroll_button">Enroll Now</button></th>
+            <th><a href="{% url 'home' %}">Home</a></th>
+            <th><a href="{% url 'aboutus' %}">About Us</a></th>
+            <th><a href="{% url 'academics' %}">Academics</a></th>
+            <th><a href="{% url 'admission' %}">Admission</a></th>
+            <th><a href="{% url 'studentservice' %}">Student Services</a></th>
+            <th><a href="{% url 'logout' %}">Logout</a></th>
+        </tr>
+    </table>
+
+    <section class="logo-background">
+        <div class="logo-container">
+            <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+        </div>
+        <h1 class="description addpad">Announcements</h1>
+        {% if user_name %}
+        <h1 class="description">Hi {{ user_name }}!</h1>
+        {% else %}
+        <h1 class="description">Welcome, Guest!</h1>
+        {% endif %}
+    </section>
+    <br>
+
+    <section class="section maroon-bg">
+        <h2 class="description">Latest Announcements</h2>
+        <div class="description">
+            {% if announcements %}
+                {% for announcement in announcements %}
+                    <div class="announcement-card">
+                        <h3>{{ announcement.title }}</h3>
+                        <p>{{ announcement.date_posted|date:"F d, Y" }}</p>
+                        <p>{{ announcement.content }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No announcements available at the moment. Please check back later.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="banner-section description2" id="banner2">
+        <div class="banner">
+            <img src="{% static 'sdm/images/banner2.jpg' %}" alt="Banner 2">
+            <h1>Stay Updated with the Latest News</h1>
+        </div>
+    </section>
+</body>
+</html>
