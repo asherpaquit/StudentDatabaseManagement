@@ -1,11 +1,132 @@
 # StudentDatabaseManagement
- 
 This is our Project in IM2 | Student Database Management System
-
 Francis Nino B. Yap | Asher Caleb N. Paquit | Terrence John N. Duterte
 
-UI/UX : https://www.figma.com/design/TOmIKVaTRuWb9xTnj0CT6x/Untitled?node-id=0-1&t=ELxnuF5Fpwk30GEg-1&classId=a6df1db2-d821-48ce-9254-70874946ed27&assignmentId=388b9f55-2974-4c5e-9775-56b23d428720&submissionId=398d7dab-b7ee-eb79-42d7-1e7d0623ed10
+Student Database Management System (SDMS)
+Features Overview
+The Student Database Management System (SDMS) provides an intuitive interface to manage student-related data effectively. Below is a comprehensive overview of its key features:
 
-ERD: https://online.visual-paradigm.com/w/gcazwwzy/login.jsp?r=app/diagrams/#R3cU2Fsd0GVkX1g%2FffXsw3%2F0B2Rm%2B9PouD2sHEfIB4%2FpJ5bgWoaFwg%3Dg8ZgpVZ5w4KFIVn8Rc2zKybyQk5IBRpuvlg65UMYoAUEjcmQGAIOWm5QH9t0aPH6N2CMk13LOYSC1WzfCDZFWji%2FTQaetILHMTQrEFMwMSMOuHkVVj3XuT1evlRGflhIB0uUftxcbJzIwkzeAlhhdQ7WOKrnPeqpd3cZjKy7haygbsYREMzuRQYtiFB7JfANyjD3jPTBayW%2Be03%2BP8lpns48lKyr%2FrTqfKmg64hPqBnuKXhb%2FhtE9kdSi%2BciBMEPc50xkAj6g73mez1td3qPYDpvhFv9fg05PqtjvbdkALsrp1qzLgb6RxqelSELI0zXSo1q%2F9j2RHwdoYgvF8NXsoqMF%2Bfq%2F%2FuhJCGXWXKIbXUnZhikU5czE8jMHQ0Yma%2FsV3ySeQq0W1evSpQnxPNFqJrIEROQe0tridLsM86vfjJkyohshfaujTTo63aSvxLmvGbbpnZGhpj8iOjfTaCx3cuKkUPdOTU7scU0WxZBeszcu%2FLwkA9vKtcEW3HDAXHMUp3WuDao7j0An%2FYvvsgT1KNaUSw3Bl0Db4ZP%2Ftk94nhYn%2FIlK%2FOcYV7ri5nQMbeBbvmiHMMcmKTHYSM6xHSZ2poUUsOlysEvAYjWzD%2FpYkNBtCUk%2Bc2WAJJHsNUWOpyyZW%2BofEW3nebKMdLldRvsxjDvNPlbjr6seYGRQGsWjb8ZT8xCu3Ft7ve402RSNImUg3cCKAO2Z%2Fw2aPUEWQjC4wUGDEUJfaMRNBmGBcq7zESezmyOEi%2Fa%2BpjwkZ%2BTsMq0LyfsMlem0TKvf%2FBdeSf1wWTOx5QEAt4I3pJFjf4%2BKlR9uLTutZca2cY8cfvIB%2Bg0vs9A5U3H5YIeStx2Z77%2FhQV3BHGjzjmy%2F3%2FbvXRQZL4p3rcTI1Htlqw5s9FByMn%2FYAi9mEu%2B27O6LR0xk4njkqzI6ujAoKSQd%2BR%2By22rKkxHnjAvi%2F%2BSOLurG8mIuzWxRAo7iTBs%2BMS1tPfMdqExzNRLfhHrQfP2q5GQzJ2vsgqZGLOjYE4ysnCEbREw1Jjwlz7TY6vs6oaPJBketYJAmsr2VlUNb50E2FHtzA19BwawlqQ4JPEEuAfecARjoqfFahm1de%2BPKsqD9qZ5zKhxTmVq%2FiZRR4jHFN%2B7n%2BTI5MNjhV7O%2BqNSaOGBb9Mkmi8QcGBD61yznFB5%2BD9ZAUVvnCtMcvly%2BzH1eRC6xIdizWDLb8qWiJMF1GZ%2BcdI%2BDa97fTPxQYClVMsDVlJtcD5LEWZ1GhOKm2oORRcKNxqCL0qtb5B82gSc7adW8yjW8%2BbQUsubSGuEPVyb5%2FP6iZ7UJ4zgVRKXmWysBFQE3qvtTmOdrzER9ycJZtjmYTQBszRDW%2Bh8NoT8lBff5vBBUD3LXbPKYA2pgPvZNUETTYRpcy9e%2BHW7O
+1. Student Management
+Purpose: Track and manage student data.
 
-Gantt Chart: https://docs.google.com/spreadsheets/d/1zHHPi079X5mXHH87foUqVRMfHlKwCyRP6CffWlpqzPo/edit?gid=0#gid=0
+Features:
+
+Add, edit, and delete student records.
+Search and filter students by specific criteria such as name or email.
+2. Course Management
+Purpose: Organize and manage courses and their enrollment details.
+
+Features:
+
+Add, edit, and delete courses.
+Assign teachers to courses.
+Manage course enrollments for students.
+3. Grade Management
+Purpose: Track academic performance.
+
+Features:
+
+Assign grades to students in specific courses.
+Update or view grades by student or course.
+Generate grade reports.
+4. Teacher Management
+Purpose: Maintain teacher details and assigned courses.
+
+Features:
+
+Add, edit, and delete teacher records.
+Assign courses to teachers.
+Track teacher responsibilities and performance.
+5. Admin Dashboard
+Purpose: Provide an overview of key system statistics and administrative capabilities.
+
+Features:
+
+View summary statistics for students, teachers, and courses.
+Manage user roles and permissions.
+6. Scholarship and Financial Aid Management
+Purpose: Simplify the management of student scholarships and financial aid.
+
+Features:
+
+Record and track scholarship eligibility and disbursement.
+View and manage student financial aid applications.
+Key Interface Features
+User Dashboard: Displays an overview of students, courses, and grades.
+Navigation Menu: Allows access to modules like Students, Courses, Teachers, and Financial Aid.
+Search and Filter: Quickly find records using a global search or filters.
+Responsive Design: Fully functional across desktop and mobile devices.
+User Roles
+Admin
+Full access to all functionalities.
+Create, edit, delete records, manage users, and update roles.
+Teacher
+Limited access to course and grade management.
+Update student grades and manage course materials.
+Student
+View personal data and grades.
+Apply for scholarships or financial aid.
+Technologies Used
+Frontend: HTML, CSS, JavaScript.
+Backend: Python (Django framework).
+Database: SQLite (Development) or MySQL/PostgreSQL (Production).
+Other Tools: Figma (UI/UX design), Git (Version control).
+Links
+Gantt Chart: View here
+UI/UX Design: View here
+ERD: View here
+Getting Started
+Follow these steps to set up and run the project locally:
+
+Prerequisites
+Ensure you have the following installed on your system:
+
+Python 3.x
+Django
+Virtualenv
+Backend Setup
+Clone the repository and navigate to the project directory:
+
+bash
+Copy code
+git clone <repository_url>
+cd StudentDatabaseManagement
+Create a virtual environment:
+
+bash
+Copy code
+python -m venv venv
+Activate the virtual environment:
+
+On Windows:
+bash
+Copy code
+venv\Scripts\activate
+On macOS/Linux:
+bash
+Copy code
+source venv/bin/activate
+Install the required dependencies:
+
+bash
+Copy code
+pip install -r requirements.txt
+Apply the database migrations:
+
+bash
+Copy code
+python manage.py makemigrations
+python manage.py migrate
+Create a superuser to access the Django admin interface:
+
+bash
+Copy code
+python manage.py createsuperuser
+Follow the prompts to set up a username, email, and password.
+
+Run the development server:
+
+bash
+Copy code
+python manage.py runserver
+Access the application at http://127.0.0.1:8000/.
