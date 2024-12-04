@@ -33,7 +33,7 @@ urlpatterns = [
     path('admission/', admission, name='admission'),
     path('register_admin/', register_admin, name='registeradmin'),
     path('login_admin/', login_admin, name='loginadmin'),
-     path('admin-dashboard/', admin_dashboard, name='admin_dashboard'),
+    path('admin-dashboard/', admin_dashboard, name='admin_dashboard'),
     # path('add_grade/', add_grade, name='add_grade'),
 ]
 

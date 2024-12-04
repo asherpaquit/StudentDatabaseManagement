@@ -71,7 +71,6 @@ def register_admin(request):
         
     return render(request, 'sdm/register_admin.html')
 
-
 @login_required
 def admin_dashboard(request):
     teachers = Teacher.objects.all()
@@ -81,14 +80,32 @@ def admin_dashboard(request):
     # Create a list to hold course and teacher information
     courses_with_teachers = []
     for course in courses:
-        teachers_assigned = CourseTeacher.objects.filter(course=course)
+        teachers_assigned = CourseTeacher.objects.filter(course=course).select_related('teacher')
         for ct in teachers_assigned:
             courses_with_teachers.append({
                 'course_id': course.id,
                 'course_name': course.name,
-                'teacher_id': ct.teacher.id,
+                'teacher_email': ct.teacher.email,
                 'teacher_name': ct.teacher.teacher_name
             })
+
+    # Create a list to hold student information
+    students_info = []
+    for student in students:
+        enrollments = CourseEnrollment.objects.filter(student=student).prefetch_related('course__courseteacher_set__teacher')
+        student_courses = []
+        for enrollment in enrollments:
+            course = enrollment.course
+            teacher = course.courseteacher_set.first().teacher if course.courseteacher_set.exists() else None
+            student_courses.append({
+                'course_name': course.name,
+                'teacher_name': teacher.teacher_name if teacher else 'No teacher assigned'
+            })
+        students_info.append({
+            'student_name': student.student_name,
+            'student_email': student.email,
+            'courses': student_courses
+        })
 
     if request.method == "POST":
         # Handle course creation
@@ -137,13 +154,13 @@ def admin_dashboard(request):
         # Handle student enrollment
         elif 'enroll_student' in request.POST:
             course_id = request.POST['course_id']
-            teacher_id = request.POST['teacher_id']
+            teacher_email = request.POST['teacher_email']
             student_email = request.POST['student_email']
 
             try:
                 # Get course, teacher, and student
                 course = Course.objects.get(id=course_id)
-                teacher = Teacher.objects.get(id=teacher_id)
+                teacher = Teacher.objects.get(email=teacher_email)
                 student = Student.objects.get(email=student_email)
                 
                 # Check if the course and teacher pair is valid
@@ -166,10 +183,10 @@ def admin_dashboard(request):
         'courses': courses,
         'students': students,
         'courses_with_teachers': courses_with_teachers,
+        'students_info': students_info,
     }
 
     return render(request, 'sdm/admin_dashboard.html', context)
-
 
 def login_student(request):
     if request.method == "POST":
@@ -340,7 +357,6 @@ def teacher_dashboard(request):
     # Get courses taught by this teacher
     courses = teacher.courses.all()
     students_with_grades = []
-    enrolled_students = set()  # To collect all enrolled students in any of the teacher's courses
 
     for course in courses:
         # Get students enrolled in the course
@@ -352,7 +368,8 @@ def teacher_dashboard(request):
                 'grade': grade.grade if grade else 'N/A',
                 'course': course
             })
-            enrolled_students.add(student)
+
+    enrolled_students = list(set([entry['student'] for entry in students_with_grades]))
 
     if request.method == "POST" and 'add_grade' in request.POST:
         student_email = request.POST['student_email']
@@ -383,6 +400,7 @@ def teacher_dashboard(request):
     }
 
     return render(request, 'sdm/teacher_dashboard.html', context)
+
 
 
 # Elementary Level View
