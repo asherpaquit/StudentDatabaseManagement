@@ -101,11 +101,14 @@
 
             <label for="course_id">Select Course:</label>
             <select id="course_id" name="course_id" required>
-                {% for course in courses %}
-                    <option value="{{ course.id }}">{{ course.name }}</option>
+                {% for course in courses_with_teachers %}
+                    <option value="{{ course.course_id }}" data-teacher="{{ course.teacher_id }}">
+                        {{ course.course_name }} - {{ course.teacher_name }}
+                    </option>
                 {% endfor %}
             </select><br>
 
+            <input type="hidden" id="teacher_id" name="teacher_id">
             <button type="submit" name="enroll_student">Enroll Student</button>
         </form>
     </div>
@@ -113,6 +116,13 @@
     <script>
         // Show the create-course tab on load
         showTab('create-course');
+
+        // Update hidden teacher_id field when selecting a course
+        document.getElementById('course_id').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var teacherId = selectedOption.getAttribute('data-teacher');
+            document.getElementById('teacher_id').value = teacherId;
+        });
     </script>
 </body>
 </html>
