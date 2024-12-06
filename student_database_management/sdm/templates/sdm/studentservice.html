@@ -53,11 +53,13 @@
                 <table class="course-table">
                     <tr>
                         <th>Course</th>
+                        <th>Teacher</th> <!-- Added Teacher column -->
                         <th>Grade</th>
                     </tr>
                     {% for entry in courses_with_grades %}
                         <tr>
                             <td>{{ entry.course }}</td>
+                            <td>{{ entry.teacher_name }}</td>  <!-- Display the teacher's name -->
                             <td>{{ entry.grade }}</td>
                         </tr>
                     {% endfor %}

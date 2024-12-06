@@ -113,21 +113,16 @@
         </form>
     </div>
 
-   <!-- Student Information Tab -->
-<div id="student-info" class="tab">
-    <h2 class="description">Student Information</h2>
-    <table>
-        <thead>
+    <!-- Student Information Tab -->
+    <div id="student-info" class="tab">
+        <h2 class="description">Student Information</h2>
+        <table>
             <tr>
                 <th>Student Name</th>
                 <th>Student Email</th>
                 <th>Courses</th>
                 <th>Teachers</th>
-                <th>Grade</th>
-                <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
             {% for student in students_info %}
                 <tr>
                     <td>{{ student.student_name }}</td>
@@ -146,50 +141,9 @@
                             {% endfor %}
                         </ul>
                     </td>
-                    <td>
-                        <ul>
-                            {% for course in student.courses %}
-                                {% with enrollment=student_enrollments|get_item:course.course_name %}
-                                    {% if enrollment.grade %}
-                                        <li>{{ enrollment.grade.grade }}</li>
-                                    {% else %}
-                                        <li>N/A</li>
-                                    {% endif %}
-                                {% endwith %}
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>
-                        <ul>
-                            {% for course in student.courses %}
-                                <!-- Drop Student Form -->
-                                <form method="POST" style="display:inline;">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="student_email" value="{{ student.email }}">
-                                    <input type="hidden" name="course_id" value="{{ course.id }}">
-                                    <button type="submit" name="drop_student">Drop</button>
-                                </form>
-                                <br>
-
-                                <!-- Add/Update Grade Form (only if grade is N/A) -->
-                                {% with enrollment=student_enrollments|get_item:course.course_name %}
-                                    {% if not enrollment.grade %}
-                                        <form method="POST" style="display:inline;">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="enrollment_id" value="{{ enrollment.id }}">
-                                            <input type="text" name="grade" placeholder="Enter Grade" required>
-                                            <button type="submit" name="update_grade">Update Grade</button>
-                                        </form>
-                                    {% endif %}
-                                {% endwith %}
-                            {% endfor %}
-                        </ul>
-                    </td>
                 </tr>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
-
+        </table>
+    </div>
 </body>
 </html>

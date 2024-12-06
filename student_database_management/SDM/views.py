@@ -267,19 +267,22 @@ def studentservice(request):
     try:
         student = Student.objects.get(email=email)
         
-        # Prepare a list of courses with grades
+        # Prepare a list of courses with grades and teachers
         courses_with_grades = []
         for course in student.enrolled_courses.all():
             grade = Grade.objects.filter(student=student, course=course).first()  # Use `course` field instead of `subject`
+            teacher = CourseTeacher.objects.filter(course=course).first()  # Fetch the first teacher assigned to the course
+            
             courses_with_grades.append({
                 'course': course.name,
-                'grade': grade.grade if grade else 'N/A'
+                'grade': grade.grade if grade else 'N/A',
+                'teacher_name': teacher.teacher.teacher_name if teacher else 'N/A',  # Get the teacher's name
             })
 
         return render(request, 'sdm/studentservice.html', {
             'student_name': student_name,
             'student_email': email,
-            'courses_with_grades': courses_with_grades,  # Pass courses with grades
+            'courses_with_grades': courses_with_grades,  # Pass courses with grades and teacher names
         })
     except Student.DoesNotExist:
         messages.error(request, "Student not found.")
