@@ -1,139 +1,125 @@
-🎓 Student Database Management System (SDMS)
-A powerful and intuitive platform for managing student-related data efficiently.
-
-✨ Features Overview
-The Student Database Management System (SDMS) provides a wide array of features to streamline student data management:
-
-🧑‍🎓 1. Student Management
-Purpose: Track and manage student data.
-Features:
-
-➕ Add, ✏️ edit, and ❌ delete student records.
-🔍 Search and filter students by criteria (e.g., name or email).
+# 🎓 Student Database Management System (SDMS)
+## Overview
+A web-based Student Management System built with Django, providing functionalities for administrators, teachers, and students. 
+This system includes course management, student enrollment, grading, and user profile management.
 
 
-📚 2. Course Management
-Purpose: Organize and manage courses and enrollment details.
-Features:
+## 📝Specifications for Functionality 
 
-➕ Add, ✏️ edit, and ❌ delete courses.
-👩‍🏫 Assign teachers to courses.
-👥 Manage course enrollments for students.
+### - Admin Management
+Admin user creation and management
 
+### - Teacher Management
+- Teacher user creation and management
+- Course assignment to teachers
 
-🏆 3. Grade Management
-Purpose: Monitor academic performance.
-Features:
+### - Student Management
+- Student user creation and management
+- Enrollment in courses
+- Viewing grades
 
-✅ Assign grades to students.
-🛠️ Update or view grades by student or course.
-📈 Generate grade reports.
+### - Course Management
+- Course creation and management
+- Teacher and student assignment to courses
 
+### - Grading System
+- Assignment of grades by teachers
+- Viewing grades by students
 
-🧑‍🏫 4. Teacher Management
-Purpose: Maintain teacher details and course assignments.
-Features:
+## 📊Gant Chart
+![image](https://github.com/user-attachments/assets/0cb2ccbe-22cd-4ed1-b60b-e119fa4c14e4)  
 
-➕ Add, ✏️ edit, and ❌ delete teacher records.
-📋 Assign courses to teachers.
-📊 Track teacher responsibilities.
+## 🎨UI/UX
+![image](https://github.com/user-attachments/assets/ee30bcbb-39d6-4333-ae68-79edd5a9359b)
+![image](https://github.com/user-attachments/assets/037b50ca-b5ca-4f7f-a025-92c6ed91783e)
+![image](https://github.com/user-attachments/assets/17ff2780-7e72-4c32-9944-2c5799e9f0ac)
 
+## 🛠 Tech Stack
+- Backend: Django
+- Database: SQLite
+- Frontend: HTML, JavaScript, CSS
+- Other Tools: Figma (UI/UX), Git (Version Control)
 
-🛠️ 5. Admin Dashboard
-Purpose: Provide summary statistics and administrative tools.
-Features:
+## 🚀 Installation
 
-📊 View statistics (e.g., total students, courses).
-👤 Manage user roles and permissions.
+1. Clone the repository
 
+```bash
+git clone https://github.com/Kuugang/redditclone-django.git
+cd redditclone-django
+```
 
-💰 6. Scholarship and Financial Aid Management
-Purpose: Simplify management of financial aid.
-Features:
+  
 
-📝 Record and track scholarship eligibility.
-💳 Manage disbursements and applications.
+2. Create virtual environment
 
-🌟 Key Interface Features
-📊 User Dashboard: Overview of students, courses, and grades.
-🧭 Navigation Menu: Access modules (Students, Courses, Teachers).
-🔍 Search and Filter: Locate records with ease.
-📱 Responsive Design: Functional across devices.
-
-
-👥 User Roles
-Role	Permissions
-Admin	Full access to create, edit, and delete records. Manage user roles.
-Teacher	Manage course enrollments and update student grades.
-Student	View personal data and grades. Apply for scholarships.
-
-
-🛠️ Technologies Used
-Frontend: HTML, CSS, JavaScript
-Backend: Python (Django framework)
-Database: SQLite (Dev) / MySQL/PostgreSQL (Prod)
-Other Tools: Figma (UI/UX), Git (Version Control)
-
-
-📂 Getting Started
-Prerequisites
-Ensure you have the following installed:
-
-Python 3.x
-Django
-Virtualenv
-Backend Setup
-
-1.Clone the repository:
-bash
-Copy code
-git clone <repository_url>
-cd StudentDatabaseManagement
-
-2.Create a virtual environment:
-bash
-Copy code
+```bash
 python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```
 
-3.Activate the environment:
-On Windows:
-bash
+  
 
-Copy code
-venv\Scripts\activate
+3. Install dependencies
 
-On macOS/Linux:
-bash
-Copy code
-source venv/bin/activate
-
-
-Install dependencies:
-bash
-Copy code
+```bash
 pip install -r requirements.txt
+```
 
+  
+4. Create .env file
 
-Apply migrations:
-bash
-Copy code
-python manage.py makemigrations
+```bash
+touch .env
+```
+
+5. Configure environment variables in `.env`
+
+```bash
+DATABASE_HOST = 'YOUR DATABASE HOST'
+DATABASE_NAME = 'YOUR DATABASE NAME'
+DATABASE_PORT = 'YOUR DATABASE PORT'
+DATABASE_USER = 'YOUR DATABASE USER'
+DATABASE_PASSWORD = 'YOUR DATABASE PASSWORD'
+GOOGLE_OAUTH_CLIENT_ID= 'YOUR GOOGLE WEB APP OAUTH CLIENT ID'
+EMAIL_HOST_USER = 'YOUR EMAIL HOST USER'
+EMAIL_HOST_PASSWORD = 'YOUR EMAIL HOST PASSWORD'
+```
+  
+6. Run migrations and seeding
+
+```bash
 python manage.py migrate
+python manage.py populate_topics
+```
 
+7. Collect static files
 
-Create a superuser:
-bash
-Copy code
-python manage.py createsuperuser
+```bash
+python manage.py collectstatic
+```
 
+8. Start the development server
 
-Run the development server:
-bash
-Copy code
+```bash
 python manage.py runserver
-Access the app at http://127.0.0.1:8000/.
-📎 Links
-📅 Gantt Chart
-🎨 UI/UX Design
-📋 ERD
+```
+## 🔒 Security Note
+
+-   Never commit `.env` file to version control
+-   Use a `.gitignore` file to exclude sensitive credentials
+-   Rotate credentials periodically
+  
+
+## 🤝 Contributing
+
+1. Fork the repository
+
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+
+5. Open a Pull Request
 
