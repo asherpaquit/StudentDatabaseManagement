@@ -110,8 +110,8 @@ def admin_dashboard(request):
     if request.method == "POST":
         # Handle course creation
         if 'add_course' in request.POST:
-            course_name = request.POST['course_name']
-            teacher_email = request.POST['teacher_email']
+            course_name = request.POST.get('course_name')
+            teacher_email = request.POST.get('teacher_email', '')
 
             # Check if course already exists
             if Course.objects.filter(name=course_name).exists():
@@ -134,8 +134,8 @@ def admin_dashboard(request):
 
         # Handle teacher assignment to course
         elif 'assign_teacher' in request.POST:
-            course_id = request.POST['course_id']
-            teacher_email = request.POST['teacher_email']
+            course_id = request.POST.get('course_id')
+            teacher_email = request.POST.get('teacher_email')
 
             try:
                 # Get course and teacher
@@ -153,27 +153,31 @@ def admin_dashboard(request):
 
         # Handle student enrollment
         elif 'enroll_student' in request.POST:
-            course_id = request.POST['course_id']
-            teacher_email = request.POST['teacher_email']
-            student_email = request.POST['student_email']
+            course_id = request.POST.get('course_id')
+            teacher_email = request.POST.get('teacher_email', '')
+            student_email = request.POST.get('student_email')
 
             try:
-                # Get course, teacher, and student
+                # Get course and student
                 course = Course.objects.get(id=course_id)
-                teacher = Teacher.objects.get(email=teacher_email)
                 student = Student.objects.get(email=student_email)
                 
-                # Check if the course and teacher pair is valid
-                if CourseTeacher.objects.filter(course=course, teacher=teacher).exists():
-                    # Use the CourseEnrollment through model to enroll the student in the course
-                    CourseEnrollment.objects.create(course=course, student=student)
-                    messages.success(request, f"Student {student.student_name} enrolled in {course.name} with {teacher.teacher_name}.")
-                else:
-                    messages.error(request, "Invalid course and teacher combination.")
+                # Check if the course and teacher pair is valid, if teacher_email is provided
+                if teacher_email:
+                    try:
+                        teacher = Teacher.objects.get(email=teacher_email)
+                        if not CourseTeacher.objects.filter(course=course, teacher=teacher).exists():
+                            messages.error(request, "Invalid course and teacher combination.")
+                            return redirect('admin_dashboard')
+                    except Teacher.DoesNotExist:
+                        messages.error(request, "Teacher not found.")
+                        return redirect('admin_dashboard')
+                
+                # Use the CourseEnrollment through model to enroll the student in the course
+                CourseEnrollment.objects.create(course=course, student=student)
+                messages.success(request, f"Student {student.student_name} enrolled in {course.name} with {teacher.teacher_name if teacher_email else 'No teacher'}.")
             except Course.DoesNotExist:
                 messages.error(request, "Course not found.")
-            except Teacher.DoesNotExist:
-                messages.error(request, "Teacher not found.")
             except Student.DoesNotExist:
                 messages.error(request, "Student not found.")
             return redirect('admin_dashboard')
