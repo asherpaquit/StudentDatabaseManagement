@@ -31,6 +31,7 @@
                 <th><button onclick="showTab('create-course')">Create Course</button></th>
                 <th><button onclick="showTab('assign-course')">Assign Course to Teacher</button></th>
                 <th><button onclick="showTab('enroll-student')">Enroll Student</button></th>
+                <th><button onclick="showTab('student-info')">Student Information</button></th>
                 <th><a href="{% url 'login_teacher' %}">Logout</a></th>
             </nav>
         </tr>
@@ -101,8 +102,10 @@
 
             <label for="course_id">Select Course:</label>
             <select id="course_id" name="course_id" required>
-                {% for course in courses %}
-                    <option value="{{ course.id }}">{{ course.name }}</option>
+                {% for course in courses_with_teachers %}
+                    <option value="{{ course.course_id }}" data-teacher="{{ course.teacher_email }}">
+                        {{ course.course_name }} - {{ course.teacher_name }}
+                    </option>
                 {% endfor %}
             </select><br>
 
@@ -110,9 +113,37 @@
         </form>
     </div>
 
-    <script>
-        // Show the create-course tab on load
-        showTab('create-course');
-    </script>
+    <!-- Student Information Tab -->
+    <div id="student-info" class="tab">
+        <h2 class="description">Student Information</h2>
+        <table>
+            <tr>
+                <th>Student Name</th>
+                <th>Student Email</th>
+                <th>Courses</th>
+                <th>Teachers</th>
+            </tr>
+            {% for student in students_info %}
+                <tr>
+                    <td>{{ student.student_name }}</td>
+                    <td>{{ student.student_email }}</td>
+                    <td>
+                        <ul>
+                            {% for course in student.courses %}
+                                <li>{{ course.course_name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for course in student.courses %}
+                                <li>{{ course.teacher_name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 </html>

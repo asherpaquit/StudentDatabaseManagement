@@ -54,7 +54,7 @@ def login_admin(request):
                 # If the password is correct, log the user in
                 # You can store the session or do other login related tasks
                 messages.success(request, "Login successful!")
-                return redirect('admin_das')  # Replace 'dashboard' with your desired redirect page
+                return redirect('admin_dashboard')  # Replace 'dashboard' with your desired redirect page
             else:
                 messages.error(request, "Invalid email or password.")
         except Admin.DoesNotExist:
@@ -83,18 +83,47 @@ def register_admin(request):
         
     return render(request, 'sdm/register_admin.html')
 
-
 @login_required
 def admin_dashboard(request):
     teachers = Teacher.objects.all()
     courses = Course.objects.all()
     students = Student.objects.all()
 
+    # Create a list to hold course and teacher information
+    courses_with_teachers = []
+    for course in courses:
+        teachers_assigned = CourseTeacher.objects.filter(course=course).select_related('teacher')
+        for ct in teachers_assigned:
+            courses_with_teachers.append({
+                'course_id': course.id,
+                'course_name': course.name,
+                'teacher_email': ct.teacher.email,
+                'teacher_name': ct.teacher.teacher_name
+            })
+
+    # Create a list to hold student information
+    students_info = []
+    for student in students:
+        enrollments = CourseEnrollment.objects.filter(student=student).prefetch_related('course__courseteacher_set__teacher')
+        student_courses = []
+        for enrollment in enrollments:
+            course = enrollment.course
+            teacher = course.courseteacher_set.first().teacher if course.courseteacher_set.exists() else None
+            student_courses.append({
+                'course_name': course.name,
+                'teacher_name': teacher.teacher_name if teacher else 'No teacher assigned'
+            })
+        students_info.append({
+            'student_name': student.student_name,
+            'student_email': student.email,
+            'courses': student_courses
+        })
+
     if request.method == "POST":
         # Handle course creation
         if 'add_course' in request.POST:
-            course_name = request.POST['course_name']
-            teacher_email = request.POST['teacher_email']
+            course_name = request.POST.get('course_name')
+            teacher_email = request.POST.get('teacher_email', '')
 
             # Check if course already exists
             if Course.objects.filter(name=course_name).exists():
@@ -117,8 +146,8 @@ def admin_dashboard(request):
 
         # Handle teacher assignment to course
         elif 'assign_teacher' in request.POST:
-            course_id = request.POST['course_id']
-            teacher_email = request.POST['teacher_email']
+            course_id = request.POST.get('course_id')
+            teacher_email = request.POST.get('teacher_email')
 
             try:
                 # Get course and teacher
@@ -136,17 +165,29 @@ def admin_dashboard(request):
 
         # Handle student enrollment
         elif 'enroll_student' in request.POST:
-            course_id = request.POST['course_id']
-            student_email = request.POST['student_email']
+            course_id = request.POST.get('course_id')
+            teacher_email = request.POST.get('teacher_email', '')
+            student_email = request.POST.get('student_email')
 
             try:
                 # Get course and student
                 course = Course.objects.get(id=course_id)
                 student = Student.objects.get(email=student_email)
                 
+                # Check if the course and teacher pair is valid, if teacher_email is provided
+                if teacher_email:
+                    try:
+                        teacher = Teacher.objects.get(email=teacher_email)
+                        if not CourseTeacher.objects.filter(course=course, teacher=teacher).exists():
+                            messages.error(request, "Invalid course and teacher combination.")
+                            return redirect('admin_dashboard')
+                    except Teacher.DoesNotExist:
+                        messages.error(request, "Teacher not found.")
+                        return redirect('admin_dashboard')
+                
                 # Use the CourseEnrollment through model to enroll the student in the course
                 CourseEnrollment.objects.create(course=course, student=student)
-                messages.success(request, f"Student {student.student_name} enrolled in {course.name}.")
+                messages.success(request, f"Student {student.student_name} enrolled in {course.name} with {teacher.teacher_name if teacher_email else 'No teacher'}.")
             except Course.DoesNotExist:
                 messages.error(request, "Course not found.")
             except Student.DoesNotExist:
@@ -157,11 +198,11 @@ def admin_dashboard(request):
         'teachers': teachers,
         'courses': courses,
         'students': students,
+        'courses_with_teachers': courses_with_teachers,
+        'students_info': students_info,
     }
 
     return render(request, 'sdm/admin_dashboard.html', context)
-
-
 
 def login_student(request):
     if request.method == "POST":
@@ -242,19 +283,22 @@ def studentservice(request):
     try:
         student = Student.objects.get(email=email)
         
-        # Prepare a list of courses with grades
+        # Prepare a list of courses with grades and teachers
         courses_with_grades = []
         for course in student.enrolled_courses.all():
             grade = Grade.objects.filter(student=student, course=course).first()  # Use `course` field instead of `subject`
+            teacher = CourseTeacher.objects.filter(course=course).first()  # Fetch the first teacher assigned to the course
+            
             courses_with_grades.append({
                 'course': course.name,
-                'grade': grade.grade if grade else 'N/A'
+                'grade': grade.grade if grade else 'N/A',
+                'teacher_name': teacher.teacher.teacher_name if teacher else 'N/A',  # Get the teacher's name
             })
 
         return render(request, 'sdm/studentservice.html', {
             'student_name': student_name,
             'student_email': email,
-            'courses_with_grades': courses_with_grades,  # Pass courses with grades
+            'courses_with_grades': courses_with_grades,  # Pass courses with grades and teacher names
         })
     except Student.DoesNotExist:
         messages.error(request, "Student not found.")
@@ -332,12 +376,11 @@ def teacher_dashboard(request):
     # Get courses taught by this teacher
     courses = teacher.courses.all()
     students_with_grades = []
-    non_enrolled_students = []
 
     for course in courses:
         # Get students enrolled in the course
-        enrolled_students = Student.objects.filter(enrolled_courses=course)
-        for student in enrolled_students:
+        students_in_course = Student.objects.filter(enrolled_courses=course)
+        for student in students_in_course:
             grade = Grade.objects.filter(student=student, course=course).first()
             students_with_grades.append({
                 'student': student,
@@ -345,69 +388,37 @@ def teacher_dashboard(request):
                 'course': course
             })
 
-        # Get students who are not enrolled in the current course
-        non_enrolled_students += Student.objects.exclude(enrolled_courses=course)
+    enrolled_students = list(set([entry['student'] for entry in students_with_grades]))
 
-    if request.method == "POST":
-        if 'add_grade' in request.POST:
-            student_email = request.POST['student_email']
-            grade_value = request.POST['grade']
-            course_name = request.POST['course_name']
-            try:
-                student = Student.objects.get(email=student_email)
-                course = Course.objects.get(name=course_name)
+    if request.method == "POST" and 'add_grade' in request.POST:
+        student_email = request.POST['student_email']
+        grade_value = request.POST['grade']
+        course_name = request.POST['course_name']
+        try:
+            student = Student.objects.get(email=student_email)
+            course = Course.objects.get(name=course_name)
 
-                if course in student.enrolled_courses.all():
-                    grade, created = Grade.objects.update_or_create(
-                        student=student, teacher=teacher, course=course,
-                        defaults={'grade': grade_value}
-                    )
-                    messages.success(request, f"Grade {grade_value} added for {student.student_name} in {course.name}.")
-                else:
-                    messages.error(request, "Student not enrolled in this course.")
-                return redirect('teacher_dashboard')
+            if course in student.enrolled_courses.all():
+                grade, created = Grade.objects.update_or_create(
+                    student=student, teacher=teacher, course=course,
+                    defaults={'grade': grade_value}
+                )
+                messages.success(request, f"Grade {grade_value} added for {student.student_name} in {course.name}.")
+            else:
+                messages.error(request, "Student not enrolled in this course.")
+            return redirect('teacher_dashboard')
 
-            except Student.DoesNotExist:
-                messages.error(request, "Student not found.")
-        elif 'enroll_student' in request.POST:
-            student_email = request.POST['student_email']
-            course_name = request.POST['course_name']
-            try:
-                student = Student.objects.get(email=student_email)
-                course = Course.objects.get(name=course_name)
-                if course not in student.enrolled_courses.all():
-                    student.enrolled_courses.add(course)
-                    messages.success(request, f"{student.student_name} has been enrolled in {course.name}.")
-                else:
-                    messages.info(request, f"{student.student_name} is already enrolled in {course.name}.")
-                return redirect('teacher_dashboard')
-            except Student.DoesNotExist:
-                messages.error(request, "Student not found.")
-        elif 'drop_student' in request.POST:
-            student_email = request.POST['student_email']
-            course_name = request.POST['course_name']
-            try:
-                student = Student.objects.get(email=student_email)
-                course = Course.objects.get(name=course_name)
-                if course in student.enrolled_courses.all():
-                    student.enrolled_courses.remove(course)
-                    messages.success(request, f"{student.student_name} has been dropped from {course.name}.")
-                else:
-                    messages.info(request, f"{student.student_name} is not enrolled in {course.name}.")
-                return redirect('teacher_dashboard')
-
-            except Student.DoesNotExist:
-                messages.error(request, "Student not found.")
+        except Student.DoesNotExist:
+            messages.error(request, "Student not found.")
 
     context = {
         'teacher_name': teacher.teacher_name,
         'students_with_grades': students_with_grades,
         'courses': courses,  # For displaying the courses the teacher is teaching
-        'non_enrolled_students': non_enrolled_students,  # For enrolling students
+        'enrolled_students': enrolled_students,  # For adding grades to students
     }
 
     return render(request, 'sdm/teacher_dashboard.html', context)
-
 
 
 

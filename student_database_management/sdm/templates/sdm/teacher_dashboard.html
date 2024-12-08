@@ -22,6 +22,16 @@
             // Show the selected tab
             document.getElementById(tabName).classList.add('active');
         }
+
+        function showCourseStudents(courseId) {
+            // Hide all student tables
+            var tables = document.getElementsByClassName('course-students');
+            for (var i = 0; i < tables.length; i++) {
+                tables[i].style.display = 'none';
+            }
+            // Show the selected course's student table
+            document.getElementById('course-' + courseId).style.display = 'table';
+        }
     </script>
 </head>
 <body>
@@ -30,7 +40,6 @@
             <nav>
                 <th><button onclick="showTab('dashboard')">Dashboard</button></th>
                 <th><button onclick="showTab('add-grade')">Add Grade</button></th>
-                <th><button onclick="showTab('enroll-student')">Enroll Student</button></th>
                 <th><a href="{% url 'login_teacher' %}">Logout</a></th>
             </nav>
         </tr>
@@ -49,29 +58,42 @@
     <div id="dashboard" class="tab active">
         <h2 class="description">Teacher Dashboard</h2>
         <p class="description">View and manage your classes here.</p>
-        <table class="description">
-            <tr>
-                <th>Student Name</th>
-                <th>Student Email</th>
-                <th>Grade</th>
-                <th>Action</th>
-            </tr>
-            {% for entry in students_with_grades %}
-                <tr>
-                    <td>{{ entry.student.student_name }}</td>
-                    <td>{{ entry.student.email }}</td>
-                    <td>{{ entry.grade }}</td>
-                    <td>
-                        <form method="POST" style="display:inline;">
-                            {% csrf_token %}
-                            <input type="hidden" name="student_email" value="{{ entry.student.email }}">
-                            <input type="hidden" name="course_name" value="{{ entry.course.name }}">
-                            <button type="submit" name="drop_student">Drop</button>
-                        </form>
-                    </td>
-                </tr>
+        
+        <label for="course_select">Select Course:</label>
+        <select id="course_select" onchange="showCourseStudents(this.value)">
+            <option value="">-- Select Course --</option>
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.name }}</option>
             {% endfor %}
-        </table>
+        </select>
+
+        {% for course in courses %}
+            <table id="course-{{ course.id }}" class="course-students description" style="display:none;">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student Email</th>
+                    <th>Grade</th>
+                    <th>Action</th>
+                </tr>
+                {% for entry in students_with_grades %}
+                    {% if entry.course.id == course.id %}
+                        <tr>
+                            <td>{{ entry.student.student_name }}</td>
+                            <td>{{ entry.student.email }}</td>
+                            <td>{{ entry.grade }}</td>
+                            <td>
+                                <form method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="student_email" value="{{ entry.student.email }}">
+                                    <input type="hidden" name="course_name" value="{{ entry.course.name }}">
+                                    <button type="submit" name="drop_student">Drop</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% endfor %}
     </div>
 
     <!-- Add Grade Tab -->
@@ -81,7 +103,7 @@
             {% csrf_token %}
             <label for="student_email">Select Student:</label>
             <select id="student_email" name="student_email" required>
-                {% for student in students %}
+                {% for student in enrolled_students %}
                     <option value="{{ student.email }}">{{ student.student_name }}</option>
                 {% endfor %}
             </select><br>
@@ -97,29 +119,6 @@
             </select><br>
 
             <button type="submit" name="add_grade">Submit Grade</button>
-        </form>
-    </div>
-
-    <!-- Enroll Student Tab -->
-    <div id="enroll-student" class="tab">
-        <h2 class="description">Enroll Student in Course</h2>
-        <form method="POST">
-            {% csrf_token %}
-            <label for="student_email">Select Student:</label>
-            <select id="student_email" name="student_email" required>
-                {% for student in non_enrolled_students %}
-                    <option value="{{ student.email }}">{{ student.student_name }}</option>
-                {% endfor %}
-            </select><br>
-            
-            <label for="course_name">Course:</label>
-            <select id="course_name" name="course_name" required>
-                {% for course in courses %}
-                    <option value="{{ course.name }}">{{ course.name }}</option>
-                {% endfor %}
-            </select><br>
-            
-            <button type="submit" name="enroll_student">Enroll Student</button>
         </form>
     </div>
 

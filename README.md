@@ -1,11 +1,133 @@
-# StudentDatabaseManagement
- 
-This is our Project in IM2 | Student Database Management System
+# 🎓 Student Database Management System (SDMS)
+## Overview
+A web-based Student Management System built with Django, providing functionalities for administrators, teachers, and students. 
+This system includes course management, student enrollment, grading, and user profile management.
 
-Francis Nino B. Yap | Asher Caleb N. Paquit | Terrence John N. Duterte
 
-UI/UX : https://www.figma.com/design/TOmIKVaTRuWb9xTnj0CT6x/Untitled?node-id=0-1&t=ELxnuF5Fpwk30GEg-1&classId=a6df1db2-d821-48ce-9254-70874946ed27&assignmentId=388b9f55-2974-4c5e-9775-56b23d428720&submissionId=398d7dab-b7ee-eb79-42d7-1e7d0623ed10
+## 📝Functional Requirements
 
-ERD: https://online.visual-paradigm.com/w/gcazwwzy/login.jsp?r=app/diagrams/#R3cU2Fsd0GVkX1g%2FffXsw3%2F0B2Rm%2B9PouD2sHEfIB4%2FpJ5bgWoaFwg%3Dg8ZgpVZ5w4KFIVn8Rc2zKybyQk5IBRpuvlg65UMYoAUEjcmQGAIOWm5QH9t0aPH6N2CMk13LOYSC1WzfCDZFWji%2FTQaetILHMTQrEFMwMSMOuHkVVj3XuT1evlRGflhIB0uUftxcbJzIwkzeAlhhdQ7WOKrnPeqpd3cZjKy7haygbsYREMzuRQYtiFB7JfANyjD3jPTBayW%2Be03%2BP8lpns48lKyr%2FrTqfKmg64hPqBnuKXhb%2FhtE9kdSi%2BciBMEPc50xkAj6g73mez1td3qPYDpvhFv9fg05PqtjvbdkALsrp1qzLgb6RxqelSELI0zXSo1q%2F9j2RHwdoYgvF8NXsoqMF%2Bfq%2F%2FuhJCGXWXKIbXUnZhikU5czE8jMHQ0Yma%2FsV3ySeQq0W1evSpQnxPNFqJrIEROQe0tridLsM86vfjJkyohshfaujTTo63aSvxLmvGbbpnZGhpj8iOjfTaCx3cuKkUPdOTU7scU0WxZBeszcu%2FLwkA9vKtcEW3HDAXHMUp3WuDao7j0An%2FYvvsgT1KNaUSw3Bl0Db4ZP%2Ftk94nhYn%2FIlK%2FOcYV7ri5nQMbeBbvmiHMMcmKTHYSM6xHSZ2poUUsOlysEvAYjWzD%2FpYkNBtCUk%2Bc2WAJJHsNUWOpyyZW%2BofEW3nebKMdLldRvsxjDvNPlbjr6seYGRQGsWjb8ZT8xCu3Ft7ve402RSNImUg3cCKAO2Z%2Fw2aPUEWQjC4wUGDEUJfaMRNBmGBcq7zESezmyOEi%2Fa%2BpjwkZ%2BTsMq0LyfsMlem0TKvf%2FBdeSf1wWTOx5QEAt4I3pJFjf4%2BKlR9uLTutZca2cY8cfvIB%2Bg0vs9A5U3H5YIeStx2Z77%2FhQV3BHGjzjmy%2F3%2FbvXRQZL4p3rcTI1Htlqw5s9FByMn%2FYAi9mEu%2B27O6LR0xk4njkqzI6ujAoKSQd%2BR%2By22rKkxHnjAvi%2F%2BSOLurG8mIuzWxRAo7iTBs%2BMS1tPfMdqExzNRLfhHrQfP2q5GQzJ2vsgqZGLOjYE4ysnCEbREw1Jjwlz7TY6vs6oaPJBketYJAmsr2VlUNb50E2FHtzA19BwawlqQ4JPEEuAfecARjoqfFahm1de%2BPKsqD9qZ5zKhxTmVq%2FiZRR4jHFN%2B7n%2BTI5MNjhV7O%2BqNSaOGBb9Mkmi8QcGBD61yznFB5%2BD9ZAUVvnCtMcvly%2BzH1eRC6xIdizWDLb8qWiJMF1GZ%2BcdI%2BDa97fTPxQYClVMsDVlJtcD5LEWZ1GhOKm2oORRcKNxqCL0qtb5B82gSc7adW8yjW8%2BbQUsubSGuEPVyb5%2FP6iZ7UJ4zgVRKXmWysBFQE3qvtTmOdrzER9ycJZtjmYTQBszRDW%2Bh8NoT8lBff5vBBUD3LXbPKYA2pgPvZNUETTYRpcy9e%2BHW7O
+### - Admin Management
+Admin user creation and management
 
-Gantt Chart: https://docs.google.com/spreadsheets/d/1zHHPi079X5mXHH87foUqVRMfHlKwCyRP6CffWlpqzPo/edit?gid=0#gid=0
+### - Teacher Management
+- Teacher user creation and management
+- Course assignment to teachers
+
+### - Student Management
+- Student user creation and management
+- Enrollment in courses
+- Viewing grades
+
+### - Course Management
+- Course creation and management
+- Teacher and student assignment to courses
+
+### - Grading System
+- Assignment of grades by teachers
+- Viewing grades by students
+
+## 📊Gant Chart
+![image](https://github.com/user-attachments/assets/0cb2ccbe-22cd-4ed1-b60b-e119fa4c14e4)  
+
+## 🎨UI/UX
+![image](https://github.com/user-attachments/assets/ee30bcbb-39d6-4333-ae68-79edd5a9359b)
+![image](https://github.com/user-attachments/assets/037b50ca-b5ca-4f7f-a025-92c6ed91783e)
+![image](https://github.com/user-attachments/assets/17ff2780-7e72-4c32-9944-2c5799e9f0ac)
+
+## 🧬 ERD
+![image](https://github.com/user-attachments/assets/f89846c0-4ae2-457d-a2f1-4f7f68d11f4c)
+
+## Links
+- ### 📊Gant Chart: https://docs.google.com/spreadsheets/d/1zHHPi079X5mXHH87foUqVRMfHlKwCyRP6CffWlpqzPo/edit?gid=0#gid=0
+- ### 🎨UI/UX: https://www.figma.com/design/TOmIKVaTRuWb9xTnj0CT6x/Untitled?node-id=0-1&t=ELxnuF5Fpwk30GEg-1&classId=a6df1db2-d821-48ce-9254-70874946ed27&assignmentId=388b9f55-2974-4c5e-9775-56b23d428720&submissionId=398d7dab-b7ee-eb79-42d7-1e7d0623ed10
+- ### 🧬 ERD: https://lucid.app/lucidchart/c62bf2d5-f1f1-4252-9363-93f1a5392765/edit?viewport_loc=2%2C-487%2C2988%2C1412%2C0_0&invitationId=inv_df52ce57-b984-41a1-89cf-62ebdc682dde
+
+## 🛠 Tech Stack
+- Backend: Django
+- Database: SQLite
+- Frontend: HTML, JavaScript, CSS
+- Other Tools: Figma (UI/UX), Git (Version Control)
+
+## 🚀 Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/Kuugang/redditclone-django.git
+cd redditclone-django
+```
+
+  
+
+2. Create virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```
+
+  
+
+3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+  
+4. Create .env file
+
+```bash
+touch .env
+```
+
+5. Configure environment variables in `.env`
+
+```bash
+DATABASE_HOST = 'YOUR DATABASE HOST'
+DATABASE_NAME = 'YOUR DATABASE NAME'
+DATABASE_PORT = 'YOUR DATABASE PORT'
+DATABASE_USER = 'YOUR DATABASE USER'
+DATABASE_PASSWORD = 'YOUR DATABASE PASSWORD'
+GOOGLE_OAUTH_CLIENT_ID= 'YOUR GOOGLE WEB APP OAUTH CLIENT ID'
+EMAIL_HOST_USER = 'YOUR EMAIL HOST USER'
+EMAIL_HOST_PASSWORD = 'YOUR EMAIL HOST PASSWORD'
+```
+  
+6. Run migrations and seeding
+
+```bash
+python manage.py migrate
+python manage.py populate_topics
+```
+
+7. Collect static files
+
+```bash
+python manage.py collectstatic
+```
+
+8. Start the development server
+
+```bash
+python manage.py runserver
+```
+## 🔒 Security Note
+
+-   Never commit `.env` file to version control
+-   Use a `.gitignore` file to exclude sensitive credentials
+-   Rotate credentials periodically
+
+  
+## 🤝 Contributing
+
+1. Fork the repository
+
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+
+5. Open a Pull Request
+
