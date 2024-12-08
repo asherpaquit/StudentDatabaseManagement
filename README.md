@@ -4,7 +4,7 @@ A web-based Student Management System built with Django, providing functionaliti
 This system includes course management, student enrollment, grading, and user profile management.
 
 
-## 📝Specifications for Functionality 
+## 📝Functional Requirements
 
 ### - Admin Management
 Admin user creation and management
