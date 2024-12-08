@@ -34,6 +34,14 @@ Admin user creation and management
 ![image](https://github.com/user-attachments/assets/037b50ca-b5ca-4f7f-a025-92c6ed91783e)
 ![image](https://github.com/user-attachments/assets/17ff2780-7e72-4c32-9944-2c5799e9f0ac)
 
+## 🧬 ERD
+![image](https://github.com/user-attachments/assets/f89846c0-4ae2-457d-a2f1-4f7f68d11f4c)
+
+## Links
+# 📊Gant Chart: https://docs.google.com/spreadsheets/d/1zHHPi079X5mXHH87foUqVRMfHlKwCyRP6CffWlpqzPo/edit?gid=0#gid=0
+# 🎨UI/UX: https://www.figma.com/design/TOmIKVaTRuWb9xTnj0CT6x/Untitled?node-id=0-1&t=ELxnuF5Fpwk30GEg-1&classId=a6df1db2-d821-48ce-9254-70874946ed27&assignmentId=388b9f55-2974-4c5e-9775-56b23d428720&submissionId=398d7dab-b7ee-eb79-42d7-1e7d0623ed10
+# 🧬 ERD: https://lucid.app/lucidchart/c62bf2d5-f1f1-4252-9363-93f1a5392765/edit?viewport_loc=2%2C-487%2C2988%2C1412%2C0_0&invitationId=inv_df52ce57-b984-41a1-89cf-62ebdc682dde
+
 ## 🛠 Tech Stack
 - Backend: Django
 - Database: SQLite
@@ -109,8 +117,8 @@ python manage.py runserver
 -   Never commit `.env` file to version control
 -   Use a `.gitignore` file to exclude sensitive credentials
 -   Rotate credentials periodically
-  
 
+  
 ## 🤝 Contributing
 
 1. Fork the repository
