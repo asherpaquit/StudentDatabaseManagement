@@ -30,9 +30,10 @@ Admin user creation and management
 ![image](https://github.com/user-attachments/assets/0cb2ccbe-22cd-4ed1-b60b-e119fa4c14e4)  
 
 ## 🎨UI/UX
-![image](https://github.com/user-attachments/assets/ee30bcbb-39d6-4333-ae68-79edd5a9359b)
-![image](https://github.com/user-attachments/assets/037b50ca-b5ca-4f7f-a025-92c6ed91783e)
-![image](https://github.com/user-attachments/assets/17ff2780-7e72-4c32-9944-2c5799e9f0ac)
+![image](https://github.com/user-attachments/assets/ba26df7a-0cbe-4c15-b0d0-7a18a8220dd0)
+![image](https://github.com/user-attachments/assets/2ea80cbb-526a-4b22-b425-cb868280c349)
+![image](https://github.com/user-attachments/assets/d23de926-8d75-475a-84ad-8374003c96ba)
+
 
 ## 🧬 ERD
 ![image](https://github.com/user-attachments/assets/f89846c0-4ae2-457d-a2f1-4f7f68d11f4c)
