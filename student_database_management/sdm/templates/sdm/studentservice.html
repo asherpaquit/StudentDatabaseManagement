@@ -11,9 +11,10 @@
             <th><button class="enroll_button">Enroll Now</button></th>
             <th><a href="{% url 'home' %}">Home</a></th>
             <th><a href="{% url 'aboutus' %}">About Us</a></th>
-            <th>Academics</th>
-            <th>Admission</th>
-            <th>Student Services</th>
+            <th><a href="{% url 'academics' %}">Academics</a></th>
+            <th><a href="{% url 'admission' %}">Admission</a></th>
+            <th><a href="{% url 'studentservice' %}">Student Services</a></th>
+            <th><a href="{% url 'calendar' %}">Calendar</a></th>
             <th><a href="{% url 'logout' %}">Logout</a></th>
         </tr>
     </table>
@@ -32,9 +33,9 @@
     <br>
 
     <section class="section maroon-bg">
-        <h2 class="description">Student Profile</h2>
+        <h2 class="wawix">Student Profile</h2>
         <div class="description">
-            <p>
+            <p class="wawix">
                 Welcome to the student services section. Here you can find all the information you need about your profile, academic progress, and more.
             </p>
         </div>
