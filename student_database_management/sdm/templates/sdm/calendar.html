@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academic Calendar</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sdm/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #555;
+        }
+        .section-header {
+            background-color: #800000; /* Maroon background */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .schedule-header {
+            background-color: #17a2b8; /* Teal background */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .event-list {
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 800px;
+            line-height: 1.8;
+        }
+        .event-list h3 {
+            color: #800000;
+            margin-bottom: 10px;
+        }
+        .event-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .event-list ul li {
+            margin: 5px 0;
+        }
+        .event-list ul li span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table class="navbar">
+        <tr>
+            <th><button class="enroll_button">Enroll Now</button></th>
+            <th><a href="{% url 'home' %}">Home</a></th>
+            <th><a href="{% url 'aboutus' %}">About Us</a></th>
+            <th><a href="{% url 'academics' %}">Academics</a></th>
+            <th><a href="{% url 'admission' %}">Admission</a></th>
+            <th><a href="{% url 'studentservice' %}">Student Services</a></th>
+            <th><a href="{% url 'logout' %}">Logout</a></th>
+        </tr>
+    </table>
+
+    <section class="logo-background">
+        <div class="logo-container">
+            <img src="{% static 'sdm/images/logo.png' %}" class="logo">
+        </div>
+        <h1 class="description addpad">Academic Calendar</h1>
+        {% if student_name %}
+        <h1 class="description">Hi {{ student_name }}!</h1>
+        {% else %}
+        <h1 class="description">Welcome, Guest!</h1>
+        {% endif %}
+    </section>
+    <br>
+
+    <!-- First Semester -->
+    <div class="event-list">
+        <h2 class="section-header">FIRST SEMESTER</h2>
+        <ul>
+            <li><span>August</span>: Club Position Founding Anniversary, Classes Begin</li>
+            <li><span>September</span>: National Heroes Day</li>
+            <li><span>October</span>: Teacher's Day</li>
+            <li><span>November</span>: All Saints' Day (Special Non-Working Day)</li>
+            <li><span>December</span>: Christmas Day, Rizal Day</li>
+        </ul>
+    </div>
+
+    <!-- Schedule of Exams First Semester -->
+    <div class="event-list">
+        <h2 class="schedule-header">SCHEDULE OF EXAMINATIONS - FIRST SEMESTER</h2>
+        <ul>
+            <li><span>September:</span> Preliminary Exams</li>
+            <li><span>October:</span> Midterm Exams</li>
+            <li><span>December:</span> Final Exams</li>
+        </ul>
+    </div>
+
+    <!-- Second Semester -->
+    <div class="event-list">
+        <h2 class="section-header">SECOND SEMESTER</h2>
+        <ul>
+            <li><span>January</span>: Classes Resume, Feast of Sto. Niño</li>
+            <li><span>February</span>: EDSA Revolution Anniversary</li>
+            <li><span>March</span>: University Days</li>
+            <li><span>April</span>: Araw ng Kagitingan</li>
+            <li><span>May</span>: Labor Day</li>
+        </ul>
+    </div>
+
+    <!-- Schedule of Exams Second Semester -->
+    <div class="event-list">
+        <h2 class="schedule-header">SCHEDULE OF EXAMINATIONS - SECOND SEMESTER</h2>
+        <ul>
+            <li><span>February:</span> Preliminary Exams</li>
+            <li><span>March:</span> Midterm Exams</li>
+            <li><span>April:</span> Final Exams for Graduating Students</li>
+            <li><span>May:</span> Final Exams for Non-Graduating Students</li>
+        </ul>
+    </div>
+
+    <section class="banner-section description2" id="banner2">
+        <div class="banner">
+            <img src="{% static 'sdm/images/banner2.jpg' %}" alt="Banner 2">
+            <h1>Stay Informed and Plan Ahead</h1>
+        </div>
+    </section>
+</body>
+</html>

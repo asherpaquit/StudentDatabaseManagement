@@ -7,6 +7,18 @@ from .models import Student, Teacher, Grade, Course, Admin,CourseTeacher, Course
 
 # Existing functions...
 
+def calendar_display(request):
+    return render(request,'sdm/calendar.html')
+
+def announcement_display(request):
+    announcements = [
+        {"title": "Midterm Exams Schedule", "date_posted": "2024-11-20", "content": "The midterm exams will begin on November 25. Please check the schedule on the portal."},
+        {"title": "Holiday Notice", "date_posted": "2024-11-15", "content": "CIT-U will be closed on December 8 in observance of a public holiday."},
+    ]
+    return render(request, 'sdm/announcement.html', {'announcements': announcements})
+
+
+
 def student_display(request):
     students = Student.objects.all()  
     return render(request, 'sdm/student_display.html', {'students': students})
